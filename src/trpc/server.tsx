@@ -21,4 +21,7 @@ createTRPCOptionsProxy<AppRouter>({
   }),
   queryClient: getQueryClient,
 });
-export const caller = appRouter.createCaller(createTRPCContext)
+export const caller = cache(async () => {
+  const ctx = await createTRPCContext();
+  return appRouter.createCaller(ctx);
+});
