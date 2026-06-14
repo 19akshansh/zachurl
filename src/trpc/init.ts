@@ -1,22 +1,45 @@
-import { initTRPC } from "@trpc/server";
-import { cache } from "react";
-export const createTRPCContext = cache(async () => {
+import { auth } from "@/lib/auth";
+import { initTRPC, TRPCError } from "@trpc/server";
+import { headers } from "next/headers";
+import superjson from "superjson";
+
+export const createTRPCContext = async (opts: { headers: Headers }) => {
   /**
    * @see: https://trpc.io/docs/server/context
    */
-  return { userId: "user_123" };
-});
-// Avoid exporting the entire t-object
-// since it's not very descriptive.
-// For instance, the use of a t variable
-// is common in i18n libraries.
-const t = initTRPC.create({
-  /**
-   * @see https://trpc.io/docs/server/data-transformers
-   */
-  // transformer: superjson,
-});
-// Base router and procedure helpers
+  const session = await auth.api.getSession({
+    headers: opts.headers,
+  });
+
+  return {
+    session,
+  };
+};
+
+const t = initTRPC
+  .context<Awaited<ReturnType<typeof createTRPCContext>>>()
+  .create({
+    transformer: superjson,
+  });
+
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
+
+export const protectedProcedure = baseProcedure.use(async ({ ctx, next }) => {
+  const session = ctx.session;
+
+  if (!session) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "You can't access this.",
+    });
+  }
+
+  return next({
+    ctx: {
+      ...ctx,
+      auth: session,
+    },
+  });
+});
