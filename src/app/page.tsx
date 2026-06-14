@@ -1,14 +1,16 @@
 import { requireAuth } from "@/lib/authUtils";
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { LogoutButton } from "@/features/auth/components/logoutBtn"; 
+import { LogoutButton } from "@/features/auth/components/logoutBtn";
 
-// This will become Landing Page later, and we'll shift this to a different route.
 const Page = async () => {
   const auth = await requireAuth();
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery(trpc.getUsers.queryOptions());
+  void queryClient.prefetchQuery({
+    queryKey: ["getUsers"],
+    queryFn: () => trpc.getUsers(),
+  });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -17,7 +19,6 @@ const Page = async () => {
           <h1 className="text-xl font-bold">Hi, {auth.user.email}</h1>
           <LogoutButton />
         </div>
-
         <p>Welcome to your dashboard.</p>
       </div>
     </HydrationBoundary>

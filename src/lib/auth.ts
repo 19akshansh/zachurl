@@ -37,7 +37,7 @@ export const auth = betterAuth({
   >
     <div style="margin-bottom: 32px;">
       <img
-        src="https://zachurl.vercel.app/mainAssets/logo.svg"
+        src="https://${process.env.NEXT_PUBLIC_APP_URL}/mainAssets/logo.svg"
         alt="Logo"
         width="80"
         height="80"
@@ -134,7 +134,7 @@ font-family: Arial, Helvetica, sans-serif;"
   >
     <div style="margin-bottom: 32px;">
       <img
-        src="https://zachurl.vercel.app/mainAssets/logo.svg"
+        src="https://${process.env.NEXT_PUBLIC_APP_URL}/mainAssets/logo.svg"
         alt="Logo"
         width="80"
         height="80"
