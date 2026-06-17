@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Nunito_Sans, Roboto } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -24,24 +23,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "h-full",
-        "antialiased",
-        geistSans.variable,
-        geistMono.variable,
-        "font-sans",
-        roboto.variable,
-      )}
-    >
-      <body className="min-h-full flex flex-col dark">
+    <html lang="en">
+      <body className="min-h-full dark">
         <TRPCReactProvider>
-          {children} <Toaster />
+          {children}
+          <Toaster />
         </TRPCReactProvider>
       </body>
     </html>

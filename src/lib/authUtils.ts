@@ -23,3 +23,11 @@ export const requireUnAuth = async () => {
     redirect("/");
   }
 };
+
+export const checkAuth = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  return session ?? null;
+};
