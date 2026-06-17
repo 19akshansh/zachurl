@@ -8,9 +8,7 @@ import {
   Link2Icon,
   BarChart3Icon,
   QrCodeIcon,
-  GlobeIcon,
   PlusCircleIcon,
-  TagIcon,
   UserIcon,
 } from "lucide-react";
 import {

@@ -10,12 +10,12 @@ const Page = async () => {
   const auth = await checkAuth();
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchQuery({
-    queryKey: ["getUsers"],
-    queryFn: () => trpc.getUsers(),
-  });
-
   const AuthComp = () => {
+    void queryClient.prefetchQuery({
+      queryKey: ["getUsers"],
+      queryFn: () => trpc.getUsers(),
+    });
+
     return (
       <SidebarProvider>
         <AppSidebar />

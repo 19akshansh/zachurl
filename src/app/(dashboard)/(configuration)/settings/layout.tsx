@@ -1,5 +1,3 @@
-import { AppHeader } from "@/components/appHeader";
-
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>

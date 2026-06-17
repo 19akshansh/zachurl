@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Nunito_Sans, Roboto } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/appSidebar";
-import { AppHeader } from "@/components/appHeader";
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" });
 

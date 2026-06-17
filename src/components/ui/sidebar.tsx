@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/tooltip";
 import {
   PanelLeftCloseIcon,
-  PanelLeftIcon,
   PanelLeftOpenIcon,
 } from "lucide-react";
 import { Slot } from "@radix-ui/react-slot";
