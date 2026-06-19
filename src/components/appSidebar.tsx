@@ -10,6 +10,7 @@ import {
   QrCodeIcon,
   PlusCircleIcon,
   UserIcon,
+  StarIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -30,6 +31,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/authClient";
+import { useHasActivePROSubscription } from "@/features/subscriptions/hooks/useSubscription";
 
 const navGroups = [
   {
@@ -55,11 +57,12 @@ const navGroups = [
 export const AppSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
 
-  if (isPending) {
-    return null;
-  }
+  const { data: session, isPending } = authClient.useSession();
+  const { hasActivePROSubscription, isLoading: isSubLoading } =
+    useHasActivePROSubscription();
+
+  if (isPending) return null;
 
   const handleLogout = async () => {
     await authClient.signOut({
@@ -74,6 +77,45 @@ export const AppSidebar = () => {
         },
       },
     });
+  };
+
+  const handleUpgrade = async () => {
+    try {
+      toast.info("Generating checkout link...");
+      const { data, error } = await authClient.checkout({
+        slug: "pro",
+      });
+
+      if (error) {
+        toast.error(error.message || "Failed to initiate checkout.");
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("An unexpected error occurred.");
+    }
+  };
+
+  const handlePortal = async () => {
+    try {
+      const { data, error } = await authClient.customer.portal();
+
+      if (error) {
+        toast.error(error.message || "Could not open billing portal.");
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Portal error:", error);
+      toast.error("Could not open billing portal.");
+    }
   };
 
   return (
@@ -118,7 +160,7 @@ export const AppSidebar = () => {
               >
                 <Link href="/urls/new" className="flex items-center gap-3">
                   <PlusCircleIcon className="size-5 shrink-0 fill-white/20" />
-                  <span className="group-data-[state=collapsed]:hidden whitespace-nowrap">
+                  <span className="group-data-[state=collapsed]:hidden">
                     Shorten Link
                   </span>
                 </Link>
@@ -145,9 +187,9 @@ export const AppSidebar = () => {
                         tooltip={item.title}
                         isActive={active}
                         className={cn(
-                          "relative h-10 px-3 transition-colors duration-200 group-data-[state=collapsed]:px-2 group-data-[state=collapsed]:justify-start",
+                          "relative h-10 px-3 transition-colors duration-200 group-data-[state=collapsed]:px-2",
                           active
-                            ? "bg-blue-600/10 text-blue-500 hover:bg-blue-600/15 hover:text-blue-500"
+                            ? "bg-blue-600/10 text-blue-500 hover:bg-blue-600/15"
                             : "text-muted-foreground hover:bg-white/5 hover:text-white",
                         )}
                       >
@@ -161,7 +203,7 @@ export const AppSidebar = () => {
                               active ? "text-blue-500" : "opacity-70",
                             )}
                           />
-                          <span className="font-medium group-data-[state=collapsed]:hidden whitespace-nowrap">
+                          <span className="font-medium group-data-[state=collapsed]:hidden">
                             {item.title}
                           </span>
                           {active && (
@@ -180,44 +222,70 @@ export const AppSidebar = () => {
 
       <SidebarFooter className="p-2">
         <SidebarMenu>
+          {!hasActivePROSubscription && !isSubLoading && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                tooltip="Upgrade to PRO"
+                className="text-amber-400 hover:bg-amber-400/10 hover:text-amber-300 transition-colors group-data-[state=collapsed]:px-2"
+              >
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleUpgrade();
+                  }}
+                >
+                  <StarIcon className="size-4 shrink-0 fill-amber-400/20" />
+                  <span className="font-semibold text-sm group-data-[state=collapsed]:hidden">
+                    Upgrade to PRO
+                  </span>
+                </button>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
+
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              tooltip="Plans & Billing"
-              className="text-muted-foreground hover:bg-white/5 hover:text-white group-data-[state=collapsed]:px-2 group-data-[state=collapsed]:justify-start"
+              tooltip="Billing Portal"
+              className="text-muted-foreground hover:bg-white/5 hover:text-white group-data-[state=collapsed]:px-2"
             >
-              <Link
-                href="/billing"
-                className="flex items-center gap-3 px-3 group-data-[state=collapsed]:px-0"
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handlePortal();
+                }}
               >
                 <CreditCardIcon className="size-4 shrink-0 opacity-70" />
-                <span className="font-medium text-sm group-data-[state=collapsed]:hidden whitespace-nowrap">
-                  Plans & Billing
+                <span className="font-medium text-sm group-data-[state=collapsed]:hidden">
+                  Manage Billing
                 </span>
-              </Link>
+              </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
-
-          <SidebarSeparator className="my-4 bg-white/5" />
-
+          <SidebarSeparator className="my-2 bg-white/5" />
           <SidebarMenuItem>
             <SidebarMenuButton
               size="lg"
-              className="group h-14 rounded-xl bg-white/[0.03] p-2 border border-white/5 transition-all hover:bg-white/[0.06] hover:border-white/10 group-data-[state=collapsed]:border-none group-data-[state=collapsed]:bg-transparent group-data-[state=collapsed]:px-1"
+              className="group h-14 rounded-xl bg-white/[0.03] p-2 border border-white/5 hover:bg-white/[0.06] group-data-[state=collapsed]:border-none group-data-[state=collapsed]:bg-transparent"
               onClick={handleLogout}
             >
               <div className="flex aspect-square size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-600/20 text-blue-500 ring-1 ring-blue-500/20">
-                <UserIcon className="size-5 shrink-0" />
+                <UserIcon className="size-5" />
               </div>
               <div className="flex flex-1 flex-col gap-0.5 ml-2 text-left group-data-[state=collapsed]:hidden">
-                <span className="text-sm font-semibold text-white/90">
+                <span className="text-sm font-semibold text-white/90 truncate w-24">
                   {session?.user?.name ?? "User"}
                 </span>
-                <span className="text-[11px] text-muted-foreground group-hover:text-blue-400 transition-colors">
+                <span className="text-[11px] text-muted-foreground group-hover:text-blue-400">
                   Sign out
                 </span>
               </div>
-              <LogOutIcon className="size-4 text-muted-foreground/50 group-hover:text-white transition-colors group-data-[state=collapsed]:hidden" />
+              <LogOutIcon className="size-4 text-muted-foreground/50 group-hover:text-white group-data-[state=collapsed]:hidden" />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

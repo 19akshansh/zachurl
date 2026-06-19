@@ -2,6 +2,15 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "@/lib/db";
 import { transporter } from "./mail";
+import { polarClient } from "./polar";
+import {
+  polar,
+  checkout,
+  portal,
+  usage,
+  webhooks,
+} from "@polar-sh/better-auth";
+
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
@@ -213,4 +222,24 @@ copy and paste this link into your browser:
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
+  plugins: [
+    polar({
+      client: polarClient,
+      createCustomerOnSignUp: true,
+      use: [
+        checkout({
+          products: [
+            {
+              productId: process.env.POLAR_PRO_PRODUCT_SLUG!,
+              slug: "pro",
+            },
+          ],
+          successUrl: process.env.POLAR_SUCCESS_URL,
+          authenticatedUsersOnly: true,
+          returnUrl: process.env.NEXT_PUBLIC_APP_URL,
+        }),
+        portal(),
+      ],
+    }),
+  ],
 });
