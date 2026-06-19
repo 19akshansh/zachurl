@@ -61,3 +61,18 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Url
+ * 
+ */
+export type Url = Prisma.UrlModel
+/**
+ * Model QrCode
+ * 
+ */
+export type QrCode = Prisma.QrCodeModel
+/**
+ * Model Click
+ * 
+ */
+export type Click = Prisma.ClickModel

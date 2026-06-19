@@ -387,7 +387,10 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Url: 'Url',
+  QrCode: 'QrCode',
+  Click: 'Click'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification"
+    modelProps: "user" | "session" | "account" | "verification" | "url" | "qrCode" | "click"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +706,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Url: {
+      payload: Prisma.$UrlPayload<ExtArgs>
+      fields: Prisma.UrlFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UrlFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UrlFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>
+        }
+        findFirst: {
+          args: Prisma.UrlFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UrlFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>
+        }
+        findMany: {
+          args: Prisma.UrlFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>[]
+        }
+        create: {
+          args: Prisma.UrlCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>
+        }
+        createMany: {
+          args: Prisma.UrlCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UrlCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>[]
+        }
+        delete: {
+          args: Prisma.UrlDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>
+        }
+        update: {
+          args: Prisma.UrlUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>
+        }
+        deleteMany: {
+          args: Prisma.UrlDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UrlUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UrlUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>[]
+        }
+        upsert: {
+          args: Prisma.UrlUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlPayload>
+        }
+        aggregate: {
+          args: Prisma.UrlAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUrl>
+        }
+        groupBy: {
+          args: Prisma.UrlGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UrlGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UrlCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UrlCountAggregateOutputType> | number
+        }
+      }
+    }
+    QrCode: {
+      payload: Prisma.$QrCodePayload<ExtArgs>
+      fields: Prisma.QrCodeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QrCodeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QrCodeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>
+        }
+        findFirst: {
+          args: Prisma.QrCodeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QrCodeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>
+        }
+        findMany: {
+          args: Prisma.QrCodeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>[]
+        }
+        create: {
+          args: Prisma.QrCodeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>
+        }
+        createMany: {
+          args: Prisma.QrCodeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.QrCodeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>[]
+        }
+        delete: {
+          args: Prisma.QrCodeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>
+        }
+        update: {
+          args: Prisma.QrCodeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>
+        }
+        deleteMany: {
+          args: Prisma.QrCodeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QrCodeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.QrCodeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>[]
+        }
+        upsert: {
+          args: Prisma.QrCodeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QrCodePayload>
+        }
+        aggregate: {
+          args: Prisma.QrCodeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQrCode>
+        }
+        groupBy: {
+          args: Prisma.QrCodeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QrCodeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QrCodeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QrCodeCountAggregateOutputType> | number
+        }
+      }
+    }
+    Click: {
+      payload: Prisma.$ClickPayload<ExtArgs>
+      fields: Prisma.ClickFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ClickFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ClickFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>
+        }
+        findFirst: {
+          args: Prisma.ClickFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ClickFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>
+        }
+        findMany: {
+          args: Prisma.ClickFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>[]
+        }
+        create: {
+          args: Prisma.ClickCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>
+        }
+        createMany: {
+          args: Prisma.ClickCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ClickCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>[]
+        }
+        delete: {
+          args: Prisma.ClickDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>
+        }
+        update: {
+          args: Prisma.ClickUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>
+        }
+        deleteMany: {
+          args: Prisma.ClickDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ClickUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ClickUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>[]
+        }
+        upsert: {
+          args: Prisma.ClickUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClickPayload>
+        }
+        aggregate: {
+          args: Prisma.ClickAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClick>
+        }
+        groupBy: {
+          args: Prisma.ClickGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClickGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ClickCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClickCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -800,6 +1025,50 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const UrlScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  originalUrl: 'originalUrl',
+  slug: 'slug',
+  totalClicks: 'totalClicks',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UrlScalarFieldEnum = (typeof UrlScalarFieldEnum)[keyof typeof UrlScalarFieldEnum]
+
+
+export const QrCodeScalarFieldEnum = {
+  id: 'id',
+  urlId: 'urlId',
+  fgColor: 'fgColor',
+  bgColor: 'bgColor',
+  logoUrl: 'logoUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QrCodeScalarFieldEnum = (typeof QrCodeScalarFieldEnum)[keyof typeof QrCodeScalarFieldEnum]
+
+
+export const ClickScalarFieldEnum = {
+  id: 'id',
+  urlId: 'urlId',
+  timestamp: 'timestamp',
+  ip: 'ip',
+  userAgent: 'userAgent',
+  device: 'device',
+  browser: 'browser',
+  os: 'os',
+  country: 'country',
+  city: 'city',
+  referer: 'referer'
+} as const
+
+export type ClickScalarFieldEnum = (typeof ClickScalarFieldEnum)[keyof typeof ClickScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -876,6 +1145,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -992,6 +1275,9 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  url?: Prisma.UrlOmit
+  qrCode?: Prisma.QrCodeOmit
+  click?: Prisma.ClickOmit
 }
 
 /* Types for Logging */

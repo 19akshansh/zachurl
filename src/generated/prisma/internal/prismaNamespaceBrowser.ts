@@ -54,7 +54,10 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Url: 'Url',
+  QrCode: 'QrCode',
+  Click: 'Click'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -129,6 +132,50 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const UrlScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  originalUrl: 'originalUrl',
+  slug: 'slug',
+  totalClicks: 'totalClicks',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UrlScalarFieldEnum = (typeof UrlScalarFieldEnum)[keyof typeof UrlScalarFieldEnum]
+
+
+export const QrCodeScalarFieldEnum = {
+  id: 'id',
+  urlId: 'urlId',
+  fgColor: 'fgColor',
+  bgColor: 'bgColor',
+  logoUrl: 'logoUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QrCodeScalarFieldEnum = (typeof QrCodeScalarFieldEnum)[keyof typeof QrCodeScalarFieldEnum]
+
+
+export const ClickScalarFieldEnum = {
+  id: 'id',
+  urlId: 'urlId',
+  timestamp: 'timestamp',
+  ip: 'ip',
+  userAgent: 'userAgent',
+  device: 'device',
+  browser: 'browser',
+  os: 'os',
+  country: 'country',
+  city: 'city',
+  referer: 'referer'
+} as const
+
+export type ClickScalarFieldEnum = (typeof ClickScalarFieldEnum)[keyof typeof ClickScalarFieldEnum]
 
 
 export const SortOrder = {

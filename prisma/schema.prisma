@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -19,9 +14,12 @@ model User {
   emailVerified Boolean   @default(false)
   image         String?
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  updatedAt     DateTime  @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
+  
+  // Relations to your new features
+  urls          Url[]
 
   @@unique([email])
   @@map("user")
@@ -69,8 +67,68 @@ model Verification {
   value      String
   expiresAt  DateTime
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt  DateTime @default(now()) @updatedAt
 
   @@index([identifier])
   @@map("verification")
+}
+
+
+model Url {
+  id           String   @id @default(cuid())
+  name         String?  
+  originalUrl  String   @db.Text
+  slug         String   @unique 
+  
+  totalClicks  Int      @default(0)
+  
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  qrCode       QrCode?
+  clicks       Click[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+  @@index([slug])
+  @@map("url")
+}
+
+model QrCode {
+  id         String   @id @default(cuid())
+  urlId      String   @unique
+  url        Url      @relation(fields: [urlId], references: [id], onDelete: Cascade)
+
+  fgColor    String   @default("#000000") // Hex color
+  bgColor    String   @default("#FFFFFF") // Hex color
+  logoUrl    String?  
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("qr_code")
+}
+
+model Click {
+  id        String   @id @default(cuid())
+  urlId     String
+  url       Url      @relation(fields: [urlId], references: [id], onDelete: Cascade)
+
+  timestamp DateTime @default(now())
+  ip        String?
+  userAgent String?
+  
+  device    String? 
+  browser   String? 
+  os        String? 
+  
+  country   String? 
+  city      String?
+  
+  referer   String? 
+
+  @@index([urlId, timestamp(sort: Desc)])
+  @@map("click")
 }
