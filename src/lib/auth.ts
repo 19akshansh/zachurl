@@ -7,14 +7,12 @@ import {
   polar,
   checkout,
   portal,
-  usage,
-  webhooks,
 } from "@polar-sh/better-auth";
-
+import { envSchem } from "@/config/env";
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL,
-  trustedOrigins: [process.env.NEXT_PUBLIC_APP_URL!],
+  baseURL: envSchem.BETTER_AUTH_URL,
+  trustedOrigins: [envSchem.NEXT_PUBLIC_APP_URL!],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
@@ -24,7 +22,7 @@ export const auth = betterAuth({
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
       await transporter.sendMail({
-        from: process.env.EMAIL_FROM,
+        from: envSchem.EMAIL_FROM,
         to: user.email,
         subject: "Reset your password",
         html: `<div
@@ -46,7 +44,7 @@ export const auth = betterAuth({
   >
     <div style="margin-bottom: 32px;">
       <img
-        src="https://${process.env.NEXT_PUBLIC_APP_URL}/mainAssets/logo.svg"
+        src="https://${envSchem.NEXT_PUBLIC_APP_URL}/mainAssets/logo.svg"
         alt="Logo"
         width="80"
         height="80"
@@ -120,7 +118,7 @@ export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       await transporter.sendMail({
-        from: process.env.EMAIL_FROM,
+        from: envSchem.EMAIL_FROM,
         to: user.email,
         subject: "Verify your email address",
         html: `<div
@@ -143,7 +141,7 @@ font-family: Arial, Helvetica, sans-serif;"
   >
     <div style="margin-bottom: 32px;">
       <img
-        src="https://${process.env.NEXT_PUBLIC_APP_URL}/mainAssets/logo.svg"
+        src="https://${envSchem.NEXT_PUBLIC_APP_URL}/mainAssets/logo.svg"
         alt="Logo"
         width="80"
         height="80"
@@ -214,12 +212,12 @@ copy and paste this link into your browser:
   },
   socialProviders: {
     github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId: envSchem.GITHUB_CLIENT_ID as string,
+      clientSecret: envSchem.GITHUB_CLIENT_SECRET as string,
     },
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: envSchem.GOOGLE_CLIENT_ID as string,
+      clientSecret: envSchem.GOOGLE_CLIENT_SECRET as string,
     },
   },
   plugins: [
@@ -230,13 +228,13 @@ copy and paste this link into your browser:
         checkout({
           products: [
             {
-              productId: process.env.POLAR_PRO_PRODUCT_SLUG!,
+              productId: envSchem.POLAR_PRO_PRODUCT_ID!,
               slug: "pro",
             },
           ],
-          successUrl: process.env.POLAR_SUCCESS_URL,
+          successUrl: envSchem.POLAR_SUCCESS_URL,
           authenticatedUsersOnly: true,
-          returnUrl: process.env.NEXT_PUBLIC_APP_URL,
+          returnUrl: envSchem.NEXT_PUBLIC_APP_URL,
         }),
         portal(),
       ],

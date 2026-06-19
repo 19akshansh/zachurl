@@ -32,6 +32,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/authClient";
 import { useHasActivePROSubscription } from "@/features/subscriptions/hooks/useSubscription";
+import { useQueryClient } from "@tanstack/react-query";
 
 const navGroups = [
   {
@@ -57,6 +58,7 @@ const navGroups = [
 export const AppSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const queryClient = useQueryClient(); 
 
   const { data: session, isPending } = authClient.useSession();
   const { hasActivePROSubscription, isLoading: isSubLoading } =
@@ -64,20 +66,22 @@ export const AppSidebar = () => {
 
   if (isPending) return null;
 
-  const handleLogout = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          toast.success("Logged out successfully");
-          router.push("/signin");
-          router.refresh();
-        },
-        onError: (ctx) => {
-          toast.error(ctx.error.message);
-        },
-      },
-    });
-  };
+   const handleLogout = async () => {
+     await authClient.signOut({
+       fetchOptions: {
+         onSuccess: () => {
+           queryClient.clear();
+
+           toast.success("Logged out successfully");
+           router.push("/signin");
+           router.refresh();
+         },
+         onError: (ctx) => {
+           toast.error(ctx.error.message);
+         },
+       },
+     });
+   };
 
   const handleUpgrade = async () => {
     try {

@@ -2,35 +2,38 @@ import { useQuery } from "@tanstack/react-query";
 import { authClient } from "@/lib/authClient";
 
 export const useSubscription = () => {
+  const { data: session, isPending: isAuthLoading } = authClient.useSession();
+  const userId = session?.user?.id;
+
   return useQuery({
-    queryKey: ["subscription"],
+    queryKey: ["subscription", userId],
     queryFn: async () => {
-      const { data } = await authClient.customer.state();
+      const { data, error } = await authClient.customer.state();
+
+      if (error) {
+        throw new Error(error.message || "Failed to fetch subscription state");
+      }
+
       return data;
     },
+
+    enabled: !!userId && !isAuthLoading,
+    staleTime: 1000 * 60 * 5, 
   });
 };
 
 export const useHasActivePROSubscription = () => {
-  const { data: customerState, isLoading, ...rest } = useSubscription();
+  const { data, isLoading, isError, error } = useSubscription();
 
-  const hasActivePROSubscription =
-    customerState?.activeSubscriptions?.some(
-      (subscription) =>
-        subscription.status === "active" &&
-        subscription.productId ===
-          process.env.NEXT_PUBLIC_POLAR_PRO_PRODUCT_SLUG,
-    ) ?? false;
+  if (isError) {
+    console.error("Subscription Error:", error);
+  }
+
+  const hasActivePROSubscription = !!data?.activeSubscriptions?.length;
 
   return {
     hasActivePROSubscription,
-    subscription: customerState?.activeSubscriptions?.find(
-      (subscription) =>
-        subscription.status === "active" &&
-        subscription.productId ===
-          process.env.NEXT_PUBLIC_POLAR_PRO_PRODUCT_SLUG,
-    ),
     isLoading,
-    ...rest,
+    isError,
   };
 };

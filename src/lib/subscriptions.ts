@@ -1,4 +1,4 @@
-import { polarClient } from "@/lib/polar";
+import { polarClient, polarSchem } from "@/lib/polar";
 
 type SubscriptionStatus = "PRO" | "FREE" | "UNKNOWN";
 
@@ -10,14 +10,19 @@ type CacheEntry = {
 const subscriptionCache = new Map<string, CacheEntry>();
 
 const CACHE_TTL_MS = 60 * 1 * 1000;
-
+const MAX_CACHE_SIZE = 1000;
 export async function getSubscriptionStatus(
   userId: string,
 ): Promise<SubscriptionStatus> {
+  const now = Date.now();
   const cached = subscriptionCache.get(userId);
 
-  if (cached && cached.expiresAt > Date.now()) {
-    return cached.status;
+  if (cached) {
+    if (cached.expiresAt <= now) {
+      subscriptionCache.delete(userId);
+    } else {
+      return cached.status;
+    }
   }
 
   try {
@@ -29,14 +34,21 @@ export async function getSubscriptionStatus(
       customer.activeSubscriptions?.some(
         (sub) =>
           sub.status === "active" &&
-          sub.productId === process.env.POLAR_PRO_PRODUCT_SLUG,
+          sub.productId === polarSchem.POLAR_PRO_PRODUCT_ID,
       ) ?? false;
 
     const status: SubscriptionStatus = hasPro ? "PRO" : "FREE";
 
+    if (subscriptionCache.size >= MAX_CACHE_SIZE) {
+      const oldestKey = subscriptionCache.keys().next().value;
+      if (oldestKey !== undefined) {
+        subscriptionCache.delete(oldestKey);
+      }
+    }
+
     subscriptionCache.set(userId, {
       status,
-      expiresAt: Date.now() + CACHE_TTL_MS,
+      expiresAt: now + CACHE_TTL_MS,
     });
 
     return status;
