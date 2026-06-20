@@ -3,16 +3,14 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "@/lib/db";
 import { transporter } from "./mail";
 import { polarClient } from "./polar";
-import {
-  polar,
-  checkout,
-  portal,
-} from "@polar-sh/better-auth";
+import { polar, checkout, portal } from "@polar-sh/better-auth";
 import { envSchem } from "@/config/env";
 
 export const auth = betterAuth({
   baseURL: envSchem.BETTER_AUTH_URL,
-  trustedOrigins: [envSchem.NEXT_PUBLIC_APP_URL!],
+  trustedOrigins: [
+    envSchem.NEXT_PUBLIC_APP_URL!,
+  ],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),

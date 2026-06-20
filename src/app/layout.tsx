@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Nunito_Sans, Roboto } from "next/font/google";
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -28,11 +29,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-full dark">
-        <TRPCReactProvider>
-          {children}
-          <Toaster />
-        </TRPCReactProvider>
+      <body
+        className={`${roboto.variable} ${geistMono.variable} min-h-full dark font-sans antialiased`}
+      >
+        <NuqsAdapter>
+          <TRPCReactProvider>
+            {children}
+            <Toaster />
+          </TRPCReactProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
