@@ -11,13 +11,6 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
     headers: opts.headers,
   });
 
-  if (!session) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    session = await auth.api.getSession({
-      headers: opts.headers,
-    });
-  }
-
   return {
     session,
   };
@@ -33,7 +26,7 @@ export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
 
-export const unprotectecdProcedure = baseProcedure.use(async ({ ctx, next }) => {
+export const unprotectedProcedure = baseProcedure.use(async ({ ctx, next }) => {
   return next({
     ctx: {
       ...ctx,

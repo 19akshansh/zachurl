@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useCreateUrl, useUpdateUrl } from "../hooks/useUrls";
 import { useUpgradeModal } from "@/hooks/useUpgradeModal";
 import { useRouter } from "next/navigation";
-import { Loader2Icon, SaveIcon, LinkIcon } from "lucide-react";
+import {  SaveIcon, LinkIcon } from "lucide-react";
 import type { Url as UrlType } from "@/generated/prisma/browser";
 
 const urlSchema = z.object({

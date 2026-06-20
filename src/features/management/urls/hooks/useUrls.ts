@@ -8,6 +8,16 @@ import {
 import { toast } from "sonner";
 import { useUrlsParams } from "./useUrlsParams";
 
+const getUrlsListBaseKey = (trpc: ReturnType<typeof useTRPC>) => {
+  const key = trpc.urls.getMany.queryOptions({
+    page: 1,
+    pageSize: 1,
+    search: "",
+  }).queryKey;
+
+  return [key[0]];
+};
+
 export const useSuspenseUrls = () => {
   const trpc = useTRPC();
   const [params] = useUrlsParams();
@@ -41,7 +51,9 @@ export const useCreateUrl = () => {
     trpc.urls.create.mutationOptions({
       onSuccess: (data) => {
         toast.success(`URL "${data.slug}" created successfully!`);
-        queryClient.invalidateQueries(trpc.urls.getMany.queryOptions({}));
+        queryClient.invalidateQueries({
+          queryKey: getUrlsListBaseKey(trpc),
+        });
       },
       onError: (error) => {
         toast.error(`Failed to create URL: ${error.message}`);
@@ -58,10 +70,15 @@ export const useUpdateUrl = () => {
     trpc.urls.update.mutationOptions({
       onSuccess: (data) => {
         toast.success(`Changes saved successfully!`);
-        queryClient.invalidateQueries(trpc.urls.getMany.queryOptions({}));
-        queryClient.invalidateQueries(
-          trpc.urls.getOne.queryOptions({ id: data.id }),
-        );
+        queryClient.invalidateQueries({
+          queryKey: getUrlsListBaseKey(trpc),
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: trpc.urls.getOne.queryOptions({
+            id: data.id,
+          }).queryKey,
+        });
       },
       onError: (error) => {
         toast.error(`Failed to update URL: ${error.message}`);
@@ -78,7 +95,9 @@ export const useRemoveUrl = () => {
     trpc.urls.remove.mutationOptions({
       onSuccess: (data) => {
         toast.success(`URL "${data.slug}" removed.`);
-        queryClient.invalidateQueries(trpc.urls.getMany.queryOptions({}));
+        queryClient.invalidateQueries({
+          queryKey: getUrlsListBaseKey(trpc),
+        });
       },
       onError: (error) => {
         toast.error(`Failed to remove URL: ${error.message}`);

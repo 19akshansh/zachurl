@@ -7,7 +7,6 @@ import {
 } from "@/features/management/urls/components/url";
 import { ErrorBoundary } from "react-error-boundary";
 import { urlParamsLoader } from "@/features/management/urls/server/paramsLoader";
-import { toast } from "sonner";
 
 type UrlsPageProps = {
   searchParams: Promise<{
@@ -24,7 +23,7 @@ const Page = async (props: UrlsPageProps) => {
   try {
     await prefetchUrls({ page, pageSize, search });
   } catch {
-    toast.error("Something went wrong. Please try again.");
+    console.error("Something went wrong. Please try again.");
   }
 
   return (

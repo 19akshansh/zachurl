@@ -4,11 +4,12 @@ import {
   createTRPCRouter,
   proProcedure,
   protectedProcedure,
-  unprotectecdProcedure,
+  unprotectedProcedure,
 } from "@/trpc/init";
 import z from "zod";
 import { PAGINATION } from "@/config/constants";
 import { TRPCError } from "@trpc/server";
+import { destinationUrlSchema, isAllowedDestinationUrl } from "./validator";
 
 const generateRandomSlug = () => {
   const words = generateSlug(2);
@@ -20,7 +21,7 @@ export const urlsRouter = createTRPCRouter({
   create: proProcedure
     .input(
       z.object({
-        originalUrl: z.string().url("Must be a valid URL"),
+        originalUrl: destinationUrlSchema,
         name: z.string().optional(),
         customSlug: z.string().min(3).max(30).optional().or(z.literal("")),
       }),
@@ -136,7 +137,7 @@ export const urlsRouter = createTRPCRouter({
   getOne: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
-      return prisma.url.findUniqueOrThrow({
+      const url = await prisma.url.findFirst({
         where: {
           id: input.id,
           userId: ctx.auth.user.id,
@@ -145,17 +146,28 @@ export const urlsRouter = createTRPCRouter({
           qrCode: true,
           clicks: {
             take: 10,
-            orderBy: { timestamp: "desc" },
+            orderBy: {
+              timestamp: "desc",
+            },
           },
         },
       });
+
+      if (!url) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "URL not found",
+        });
+      }
+
+      return url;
     }),
   update: protectedProcedure
     .input(
       z.object({
         id: z.string(),
         name: z.string().optional(),
-        originalUrl: z.string().url().optional(),
+        originalUrl: destinationUrlSchema,
         qrCode: z
           .object({
             fgColor: z.string().optional(),
@@ -168,8 +180,24 @@ export const urlsRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const { id, qrCode, ...urlData } = input;
 
+      const existing = await prisma.url.findFirst({
+        where: {
+          id,
+          userId: ctx.auth.user.id,
+        },
+      });
+
+      if (!existing) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "URL not found",
+        });
+      }
+
       return prisma.url.update({
-        where: { id, userId: ctx.auth.user.id },
+        where: {
+          id,
+        },
         data: {
           ...urlData,
           qrCode: qrCode
@@ -178,13 +206,19 @@ export const urlsRouter = createTRPCRouter({
               }
             : undefined,
         },
+        include: {
+          qrCode: true,
+        },
       });
     }),
   getAnalytics: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
-      const url = await prisma.url.findUniqueOrThrow({
-        where: { id: input.id, userId: ctx.auth.user.id },
+      const url = await prisma.url.findFirstOrThrow({
+        where: {
+          id: input.id,
+          userId: ctx.auth.user.id,
+        },
       });
 
       const [clicksByDevice, clicksByCountry, clicksByBrowser] =
@@ -215,15 +249,30 @@ export const urlsRouter = createTRPCRouter({
     }),
   remove: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(({ ctx, input }) => {
-      return prisma.url.delete({
+    .mutation(async ({ ctx, input }) => {
+      const url = await prisma.url.findFirst({
         where: {
           id: input.id,
           userId: ctx.auth.user.id,
         },
       });
+
+      if (!url) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "URL not found",
+        });
+      }
+
+      await prisma.url.delete({
+        where: {
+          id: url.id,
+        },
+      });
+
+      return url;
     }),
-  resolveAndTrack: unprotectecdProcedure
+  resolveAndTrack: unprotectedProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ input }) => {
       const { slug } = input;
@@ -253,6 +302,13 @@ export const urlsRouter = createTRPCRouter({
           },
         }),
       ]);
+
+      if (!isAllowedDestinationUrl(url.originalUrl)) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Invalid destination URL",
+        });
+      }
 
       return { originalUrl: url.originalUrl };
     }),
