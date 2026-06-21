@@ -4,11 +4,26 @@ import { useSuspenseUrl } from "../hooks/useUrls";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UrlForm } from "./urlForm";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, CopyIcon, ExternalLinkIcon } from "lucide-react";
+import {
+  ChevronLeft,
+  CopyIcon,
+  ExternalLinkIcon,
+  QrCodeIcon,
+  RefreshCcw,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
-import { toast } from "sonner"; 
+import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
+import { QrCodeEditor } from "../../qrs/components/qrCodeEditor";
+import { useGenerateQr } from "../../qrs/hooks/useQrs";
 
 export const UrlDetailsClient = ({ urlId }: { urlId: string }) => {
+  const searchParams = useSearchParams();
+  const defaultTab = searchParams.get("tab") || "analytics";
+
+  const generateQr = useGenerateQr();
+
   const { data: url } = useSuspenseUrl(urlId);
   const shortUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${url.slug}`;
 
@@ -48,7 +63,7 @@ export const UrlDetailsClient = ({ urlId }: { urlId: string }) => {
         </div>
       </div>
 
-      <Tabs defaultValue="analytics">
+      <Tabs defaultValue={defaultTab}>
         <TabsList className="bg-transparent border-b rounded-none w-full justify-start h-auto p-0 gap-6">
           <TabsTrigger
             value="analytics"
@@ -79,12 +94,39 @@ export const UrlDetailsClient = ({ urlId }: { urlId: string }) => {
         </TabsContent>
 
         <TabsContent value="qrcode" className="pt-6">
-          <div className="max-w-md border p-8 rounded-xl flex flex-col items-center gap-4">
-            <div className="size-48 bg-muted animate-pulse rounded-lg" />
-            <p className="text-sm text-muted-foreground italic">
-              QR Customization coming soon...
-            </p>
-          </div>
+          {url.qrCode ? (
+            <QrCodeEditor
+              urlId={url.id}
+              shortUrl={shortUrl}
+              initialData={url.qrCode}
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed rounded-2xl bg-zinc-900/30 border-white/5 gap-4">
+              <div className="size-16 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+                <QrCodeIcon className="size-8 text-blue-500/50" />
+              </div>
+              <div className="text-center space-y-1">
+                <h3 className="font-semibold text-zinc-200">
+                  No QR Code configuration
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Generate QR Code for this URL.
+                </p>
+              </div>
+              <Button
+                onClick={() => generateQr.mutate({ urlId: url.id })}
+                disabled={generateQr.isPending}
+                className="mt-2"
+              >
+                {generateQr.isPending ? (
+                  <RefreshCcw className="size-4 mr-2 animate-spin" />
+                ) : (
+                  <Sparkles className="size-4 mr-2" />
+                )}
+                Generate QR Code
+              </Button>
+            </div>
+          )}
         </TabsContent>
 
         <TabsContent value="settings" className="pt-6">

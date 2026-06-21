@@ -1,9 +1,6 @@
 import { UrlDetailsClient } from "@/features/management/urls/components/urlDetailsClient";
 import { requireAuth } from "@/lib/authUtils";
 import { getQueryClient, HydrateClient, trpc } from "@/trpc/server";
-import { TRPCClientError } from "@trpc/client";
-import { Link2Icon } from "lucide-react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface PageProps {
