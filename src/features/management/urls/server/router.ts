@@ -72,7 +72,7 @@ export const urlsRouter = createTRPCRouter({
             },
           },
         });
-      } catch (error) {
+  } catch (error) {
         console.error("[CREATE_URL_ERROR]", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",

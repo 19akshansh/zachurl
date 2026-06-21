@@ -16,11 +16,11 @@ import { Button } from "@/components/ui/button";
 import { useCreateUrl, useUpdateUrl } from "../hooks/useUrls";
 import { useUpgradeModal } from "@/hooks/useUpgradeModal";
 import { useRouter } from "next/navigation";
-import {  SaveIcon, LinkIcon } from "lucide-react";
+import { SaveIcon, LinkIcon, RefreshCcw } from "lucide-react";
 import type { Url as UrlType } from "@/generated/prisma/browser";
 
 const urlSchema = z.object({
-  originalUrl: z.url("Enter a valid URL (include https://)"),
+  originalUrl: z.string().url("Enter a valid URL (include https://)"),
   name: z.string().min(1, "Name is required"),
   customSlug: z.string().optional(),
 });
@@ -32,6 +32,7 @@ export const UrlForm = ({ initialData }: { initialData?: UrlType }) => {
   const updateUrl = useUpdateUrl();
 
   const isEdit = !!initialData;
+  const isPending = createUrl.isPending || updateUrl.isPending;
 
   const form = useForm<z.infer<typeof urlSchema>>({
     resolver: zodResolver(urlSchema),
@@ -77,7 +78,9 @@ export const UrlForm = ({ initialData }: { initialData?: UrlType }) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Link Name</FormLabel>
+              <FormLabel className="text-xs text-muted-foreground">
+                Link Name
+              </FormLabel>
               <FormControl>
                 <Input placeholder="e.g. Portfolio" {...field} />
               </FormControl>
@@ -90,7 +93,9 @@ export const UrlForm = ({ initialData }: { initialData?: UrlType }) => {
           name="originalUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Destination URL</FormLabel>
+              <FormLabel className="text-xs text-muted-foreground">
+                Destination URL
+              </FormLabel>
               <FormControl>
                 <Input placeholder="https://..." {...field} />
               </FormControl>
@@ -104,7 +109,9 @@ export const UrlForm = ({ initialData }: { initialData?: UrlType }) => {
             name="customSlug"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Custom Slug (Optional)</FormLabel>
+                <FormLabel className="text-xs text-muted-foreground">
+                  Custom Slug (Optional)
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="my-link" {...field} />
                 </FormControl>
@@ -113,17 +120,20 @@ export const UrlForm = ({ initialData }: { initialData?: UrlType }) => {
             )}
           />
         )}
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={createUrl.isPending || updateUrl.isPending}
-        >
-          {isEdit ? (
+        <Button type="submit" className="w-full shadow-sm" disabled={isPending}>
+          {isPending ? (
+            <RefreshCcw className="mr-2 size-4 animate-spin" />
+          ) : isEdit ? (
             <SaveIcon className="mr-2 size-4" />
           ) : (
             <LinkIcon className="mr-2 size-4" />
           )}
-          {isEdit ? "Save Changes" : "Shorten URL"}
+
+          {isPending
+            ? "Saving Changes..."
+            : isEdit
+              ? "Save Changes"
+              : "Shorten URL"}
         </Button>
       </form>
     </Form>

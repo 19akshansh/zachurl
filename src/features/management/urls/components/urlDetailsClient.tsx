@@ -6,9 +6,14 @@ import { UrlForm } from "./urlForm";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, CopyIcon, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
-import { toast } from "sonner"; 
+import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
+import { QrCodeEditor } from "../../qrs/components/qrCodeEditor";
 
 export const UrlDetailsClient = ({ urlId }: { urlId: string }) => {
+  const searchParams = useSearchParams();
+  const defaultTab = searchParams.get("tab") || "analytics";
+
   const { data: url } = useSuspenseUrl(urlId);
   const shortUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${url.slug}`;
 
@@ -48,7 +53,7 @@ export const UrlDetailsClient = ({ urlId }: { urlId: string }) => {
         </div>
       </div>
 
-      <Tabs defaultValue="analytics">
+      <Tabs defaultValue={defaultTab}>
         <TabsList className="bg-transparent border-b rounded-none w-full justify-start h-auto p-0 gap-6">
           <TabsTrigger
             value="analytics"
@@ -79,12 +84,19 @@ export const UrlDetailsClient = ({ urlId }: { urlId: string }) => {
         </TabsContent>
 
         <TabsContent value="qrcode" className="pt-6">
-          <div className="max-w-md border p-8 rounded-xl flex flex-col items-center gap-4">
-            <div className="size-48 bg-muted animate-pulse rounded-lg" />
-            <p className="text-sm text-muted-foreground italic">
-              QR Customization coming soon...
-            </p>
-          </div>
+          {url.qrCode ? (
+            <QrCodeEditor
+              urlId={url.id}
+              shortUrl={shortUrl}
+              initialData={url.qrCode}
+            />
+          ) : (
+            <div className="p-12 text-center border rounded-xl border-dashed">
+              <p className="text-sm text-muted-foreground">
+                QR Code data not found. Try refreshing the page.
+              </p>
+            </div>
+          )}
         </TabsContent>
 
         <TabsContent value="settings" className="pt-6">
