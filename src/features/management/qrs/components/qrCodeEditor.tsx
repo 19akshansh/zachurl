@@ -26,11 +26,7 @@ interface QrEditorProps {
   };
 }
 
-export const QrCodeEditor = ({
-  urlId,
-  shortUrl,
-  initialData,
-}: QrEditorProps) => {
+export const QrCodeEditor = ({ urlId, shortUrl, initialData }: QrEditorProps) => {
   const [fgColor, setFgColor] = useState(initialData.fgColor);
   const [bgColor, setBgColor] = useState(initialData.bgColor);
   const [logoUrl, setLogoUrl] = useState(initialData.logoUrl || "");
@@ -64,18 +60,32 @@ export const QrCodeEditor = ({
 
   const downloadQr = () => {
     if (!qrRef.current) return;
+
     const svgData = qrRef.current.outerHTML;
     const svgBlob = new Blob([svgData], {
       type: "image/svg+xml;charset=utf-8",
     });
+
     const svgUrl = URL.createObjectURL(svgBlob);
-    const downloadLink = document.createElement("a");
-    downloadLink.href = svgUrl;
-    downloadLink.download = `qr-${urlId}.svg`;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    toast.success("Downloaded SVG");
+
+    try {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = svgUrl;
+      downloadLink.download = `qr-code-${urlId}.svg`;
+
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+
+      toast.success("QR Code downloaded as SVG");
+    } catch (error) {
+      console.error("Download failed:", error);
+      toast.error("Failed to download QR code");
+    } finally {
+      setTimeout(() => {
+        URL.revokeObjectURL(svgUrl);
+      }, 100);
+    }
   };
 
   return (
@@ -221,4 +231,4 @@ export const QrCodeEditor = ({
       </div>
     </div>
   );
-};
+};;

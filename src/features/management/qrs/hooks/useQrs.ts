@@ -35,6 +35,25 @@ export const useSuspenseQr = (urlId: string) => {
   return useSuspenseQuery(trpc.qrs.getOne.queryOptions({ urlId }));
 };
 
+export const useGenerateQr = () => {
+  const queryClient = useQueryClient();
+  const trpc = useTRPC();
+
+  return useMutation(
+    trpc.qrs.generate.mutationOptions({
+      onSuccess: (data) => {
+        toast.success("QR Code generated!");
+        queryClient.invalidateQueries({
+          queryKey: trpc.qrs.getOne.queryOptions({ urlId: data.urlId }).queryKey,
+        });
+      },
+      onError: (error) => {
+        toast.error(`Failed to generate: ${error.message}`);
+      },
+    }),
+  );
+};
+
 export const useUpdateQr = () => {
   const queryClient = useQueryClient();
   const trpc = useTRPC();
@@ -82,6 +101,32 @@ export const useResetQrStyles = () => {
       },
       onError: (error) => {
         toast.error(`Failed to reset QR Code: ${error.message}`);
+      },
+    }),
+  );
+};
+
+export const useRemoveQr = () => {
+  const queryClient = useQueryClient();
+  const trpc = useTRPC();
+
+  return useMutation(
+    trpc.qrs.remove.mutationOptions({
+      onSuccess: (data) => {
+        toast.success(`QR Code configuration removed.`);
+
+        queryClient.invalidateQueries({
+          queryKey: getQrsListBaseKey(trpc),
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: trpc.qrs.getOne.queryOptions({
+            urlId: data.urlId,
+          }).queryKey,
+        });
+      },
+      onError: (error) => {
+        toast.error(`Failed to remove QR Code: ${error.message}`);
       },
     }),
   );

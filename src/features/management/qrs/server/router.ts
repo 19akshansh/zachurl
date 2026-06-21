@@ -5,6 +5,32 @@ import { TRPCError } from "@trpc/server";
 import { PAGINATION } from "@/config/constants";
 
 export const qrsRouter = createTRPCRouter({
+  generate: protectedProcedure
+    .input(z.object({ urlId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { urlId } = input;
+
+      const url = await prisma.url.findFirst({
+        where: { id: urlId, userId: ctx.auth.user.id },
+      });
+
+      if (!url) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "URL not found.",
+        });
+      }
+
+      return prisma.qrCode.upsert({
+        where: { urlId },
+        update: {}, 
+        create: {
+          urlId,
+          fgColor: "#000000",
+          bgColor: "#FFFFFF",
+        },
+      });
+    }),
   getOne: protectedProcedure
     .input(z.object({ urlId: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -33,39 +59,36 @@ export const qrsRouter = createTRPCRouter({
     .input(
       z.object({
         urlId: z.string(),
-        fgColor: z
-          .string()
-          .regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, "Invalid Hex Color")
-          .optional(),
-        bgColor: z
-          .string()
-          .regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, "Invalid Hex Color")
-          .optional(),
-        logoUrl: z.url().nullish().or(z.literal("")),
+        fgColor: z.string().optional(),
+        bgColor: z.string().optional(),
+        logoUrl: z.string().url().nullish().or(z.literal("")),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       const { urlId, ...data } = input;
 
       const existingUrl = await prisma.url.findFirst({
-        where: {
-          id: urlId,
-          userId: ctx.auth.user.id,
-        },
+        where: { id: urlId, userId: ctx.auth.user.id },
       });
 
       if (!existingUrl) {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "You do not have permission to modify this QR code.",
+          message: "URL not found or access denied.",
         });
       }
 
-      return prisma.qrCode.update({
+      return prisma.qrCode.upsert({
         where: { urlId },
-        data: {
+        update: {
           fgColor: data.fgColor,
           bgColor: data.bgColor,
+          logoUrl: data.logoUrl === "" ? null : data.logoUrl,
+        },
+        create: {
+          urlId,
+          fgColor: data.fgColor ?? "#000000",
+          bgColor: data.bgColor ?? "#FFFFFF",
           logoUrl: data.logoUrl === "" ? null : data.logoUrl,
         },
       });
@@ -126,27 +149,58 @@ export const qrsRouter = createTRPCRouter({
   resetStyles: protectedProcedure
     .input(z.object({ urlId: z.string() }))
     .mutation(async ({ ctx, input }) => {
+      const { urlId } = input;
+
       const existingUrl = await prisma.url.findFirst({
-        where: {
-          id: input.urlId,
-          userId: ctx.auth.user.id,
-        },
+        where: { id: urlId, userId: ctx.auth.user.id },
       });
 
       if (!existingUrl) {
         throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "URL not found.",
+          code: "FORBIDDEN",
+          message: "URL not found or access denied.",
         });
       }
 
-      return prisma.qrCode.update({
-        where: { urlId: input.urlId },
-        data: {
+      return prisma.qrCode.upsert({
+        where: { urlId },
+        update: {
           fgColor: "#000000",
           bgColor: "#FFFFFF",
           logoUrl: null,
         },
+        create: {
+          urlId,
+          fgColor: "#000000",
+          bgColor: "#FFFFFF",
+          logoUrl: null,
+        },
+      });
+    }),
+  remove: protectedProcedure
+    .input(z.object({ urlId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { urlId } = input;
+
+      const qrCode = await prisma.qrCode.findFirst({
+        where: {
+          urlId,
+          url: {
+            userId: ctx.auth.user.id,
+          },
+        },
+      });
+
+      if (!qrCode) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message:
+            "QR Code not found or you don't have permission to delete it.",
+        });
+      }
+
+      return prisma.qrCode.delete({
+        where: { urlId },
       });
     }),
 });

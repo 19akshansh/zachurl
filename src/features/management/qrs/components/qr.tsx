@@ -11,8 +11,7 @@ import {
   EntityList,
   EntityItem,
 } from "@/components/entityComponents";
-import { useSuspenseQrs } from "../hooks/useQrs";
-import { useRemoveUrl } from "../../urls/hooks/useUrls";
+import { useRemoveQr, useSuspenseQrs } from "../hooks/useQrs";
 import { useUpgradeModal } from "@/hooks/useUpgradeModal";
 import { useRouter } from "next/navigation";
 import { useQrsParams } from "../hooks/useQrsParams";
@@ -109,11 +108,11 @@ interface QrItemProps {
 }
 
 export const QrItem = ({ data, onProError }: QrItemProps) => {
-  const removeUrl = useRemoveUrl();
+  const removeQr = useRemoveQr();
 
   const handleRemove = () => {
-    removeUrl.mutate(
-      { id: data.urlId },
+    removeQr.mutate(
+      { urlId: data.urlId },
       {
         onError: (err) => {
           const handled = onProError(err);
@@ -170,7 +169,7 @@ export const QrItem = ({ data, onProError }: QrItemProps) => {
         </div>
       }
       onRemove={handleRemove}
-      isRemoving={removeUrl.isPending}
+      isRemoving={removeQr.isPending}
     />
   );
 };
