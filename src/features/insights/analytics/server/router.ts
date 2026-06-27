@@ -148,6 +148,15 @@ export const analyticsRouter = createTRPCRouter({
         },
         orderBy: { timestamp: "desc" },
         take: 50,
+        select: {
+          id: true,
+          timestamp: true,
+          browser: true,
+          os: true,
+          device: true,
+          country: true,
+          city: true,
+        },
       });
     }),
 

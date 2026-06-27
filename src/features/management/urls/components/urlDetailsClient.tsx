@@ -189,9 +189,9 @@ const AnalyticsView = ({ urlId }: { urlId: string }) => {
             <RefreshCcw className="size-3" /> Recent Clicks
           </h4>
           <div className="space-y-3 max-h-[200px] overflow-y-auto pr-2">
-            {recentClicks.map((click, i) => (
+            {recentClicks.map((click) => (
               <div
-                key={i}
+                key={click.id}
                 className="flex justify-between items-center text-[10px] border-b border-zinc-500/5 pb-2"
               >
                 <span className="font-medium text-muted-foreground">
