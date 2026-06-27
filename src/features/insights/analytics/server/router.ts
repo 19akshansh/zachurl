@@ -4,6 +4,7 @@ import z from "zod";
 import { TRPCError } from "@trpc/server";
 import { subDays } from "date-fns";
 import { PAGINATION } from "@/config/constants";
+import { startOfDay, eachDayOfInterval, format, isSameDay } from "date-fns";
 
 export const analyticsRouter = createTRPCRouter({
   getMany: protectedProcedure
@@ -90,12 +91,15 @@ export const analyticsRouter = createTRPCRouter({
 
       const [clicksOverTime, devices, countries, browsers, os] =
         await Promise.all([
-          prisma.click.groupBy({
-            by: ["timestamp"],
-            where: { urlId, timestamp: { gte: dateLimit } },
-            _count: true,
-            orderBy: { timestamp: "asc" },
-          }),
+          prisma.$queryRaw<{ bucket: Date; _count: number }[]>`
+            SELECT 
+              date_trunc('day', "timestamp") as bucket, 
+              count(*)::int as "_count"
+            FROM "click"
+            WHERE "urlId" = ${urlId} AND "timestamp" >= ${dateLimit}
+            GROUP BY bucket
+            ORDER BY bucket ASC
+          `,
 
           prisma.click.groupBy({
             by: ["device"],
@@ -146,25 +150,49 @@ export const analyticsRouter = createTRPCRouter({
         take: 50,
       });
     }),
+
   getDashboardStats: protectedProcedure
     .input(
       z.object({ range: z.enum(["7d", "30d", "90d", "all"]).default("7d") }),
     )
+
     .query(async ({ ctx, input }) => {
       const { range } = input;
-      let dateLimit = subDays(new Date(), 7);
-      if (range === "30d") dateLimit = subDays(new Date(), 30);
-      if (range === "90d") dateLimit = subDays(new Date(), 90);
+      const now = new Date();
+
+      let dateLimit = subDays(now, 7);
+      if (range === "30d") dateLimit = subDays(now, 30);
+      if (range === "90d") dateLimit = subDays(now, 90);
       if (range === "all") dateLimit = new Date(0);
 
-      const clicks = await prisma.click.groupBy({
-        by: ["timestamp", "urlId"],
-        where: {
-          url: { userId: ctx.auth.user.id },
-          timestamp: { gte: dateLimit },
-        },
-        _count: true,
+      const rawClicks = await prisma.$queryRaw<
+        { bucket: Date; _count: number }[]
+      >`
+    SELECT 
+      date_trunc('day', c."timestamp") as bucket, 
+      count(*)::int as "_count"
+    FROM "click" c
+    INNER JOIN "url" u ON c."urlId" = u.id
+    WHERE u."userId" = ${ctx.auth.user.id} AND c."timestamp" >= ${dateLimit}
+    GROUP BY bucket
+    ORDER BY bucket ASC
+  `;
+
+      const allDays = eachDayOfInterval({
+        start: startOfDay(dateLimit),
+        end: startOfDay(now),
       });
+
+      const clicks = allDays.map((day) => {
+        const found = rawClicks.find((rc) =>
+          isSameDay(new Date(rc.bucket), day),
+        );
+        return {
+          bucket: day,
+          _count: found ? found._count : 0,
+        };
+      });
+
       return clicks;
     }),
 });

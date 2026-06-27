@@ -15,7 +15,6 @@ import {
   MousePointerClickIcon,
   GlobeIcon,
   SmartphoneIcon,
-  MonitorIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -69,7 +68,6 @@ const AnalyticsView = ({ urlId }: { urlId: string }) => {
 
   const maxDevice = Math.max(...stats.devices.map((d) => d._count), 0);
   const maxCountry = Math.max(...stats.countries.map((d) => d._count), 0);
-  const maxBrowser = Math.max(...stats.browsers.map((d) => d._count), 0);
 
   return (
     <div className="space-y-6 pt-2">
@@ -99,7 +97,10 @@ const AnalyticsView = ({ urlId }: { urlId: string }) => {
         </CardHeader>
         <CardContent className="h-[250px] pt-4">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={stats.clicksOverTime}>
+            <AreaChart
+              data={stats.clicksOverTime}
+              margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+            >
               <defs>
                 <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.1} />
@@ -111,22 +112,39 @@ const AnalyticsView = ({ urlId }: { urlId: string }) => {
                 vertical={false}
                 strokeOpacity={0.1}
               />
-              <XAxis dataKey="timestamp" hide />
-              <YAxis fontSize={10} tickLine={false} axisLine={false} />
+
+              <XAxis dataKey="bucket" hide />
+
+              <YAxis
+                fontSize={10}
+                tickLine={false}
+                axisLine={false}
+                allowDecimals={false}
+                domain={[0, "dataMax + 1"]}
+              />
+
               <Tooltip
+                labelFormatter={(value) => new Date(value).toLocaleDateString()}
                 contentStyle={{
                   backgroundColor: "#18181b",
-                  borderRadius: "8px",
                   border: "none",
-                  fontSize: "12px",
+                  borderRadius: "8px",
                 }}
               />
+
               <Area
                 type="monotone"
                 dataKey="_count"
                 stroke="#3b82f6"
                 fill="url(#chartColor)"
                 strokeWidth={2}
+                dot={{
+                  r: 4,
+                  fill: "#3b82f6",
+                  strokeWidth: 2,
+                  stroke: "#09090b",
+                }}
+                activeDot={{ r: 6 }}
               />
             </AreaChart>
           </ResponsiveContainer>

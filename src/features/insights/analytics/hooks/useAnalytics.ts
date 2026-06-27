@@ -2,14 +2,6 @@ import { useTRPC } from "@/trpc/client";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { useAnalyticsParams } from "./useAnalyticsParams";
 
-const getAnalyticsListBaseKey = (trpc: ReturnType<typeof useTRPC>) => {
-  const key = trpc.analytics.getMany.queryOptions({
-    page: 1,
-    pageSize: 1,
-  }).queryKey;
-  return [key[0]];
-};
-
 export const useSuspenseAnalyticsList = () => {
   const trpc = useTRPC();
   const [params] = useAnalyticsParams();

@@ -9,7 +9,7 @@ import {
 import z from "zod";
 import { PAGINATION } from "@/config/constants";
 import { TRPCError } from "@trpc/server";
-import { destinationUrlSchema, isAllowedDestinationUrl } from "./validator";
+import { destinationUrlSchema } from "./validator";
 import { UAParser } from "ua-parser-js";
 
 
@@ -275,17 +275,9 @@ export const urlsRouter = createTRPCRouter({
       return url;
     }),
   resolveAndTrack: unprotectedProcedure
-    .input(
-      z.object({
-        slug: z.string(),
-        userAgent: z.string().optional(),
-        ip: z.string().optional(),
-        country: z.string().optional(), 
-        city: z.string().optional(),
-      }),
-    )
-    .query(async ({ input }) => {
-      const { slug, userAgent, ip, country, city } = input;
+    .input(z.object({ slug: z.string() })) 
+    .query(async ({ ctx, input }) => {
+      const { slug } = input;
 
       const url = await prisma.url.findUnique({
         where: { slug },
@@ -294,6 +286,15 @@ export const urlsRouter = createTRPCRouter({
       if (!url) {
         throw new TRPCError({ code: "NOT_FOUND", message: "URL not found" });
       }
+
+      const userAgent = ctx.headers.get("user-agent") || undefined;
+      const forwarded = ctx.headers.get("x-forwarded-for");
+      const ip = forwarded
+        ? forwarded.split(",")[0]
+        : ctx.headers.get("x-real-ip") || undefined;
+
+      const country = ctx.headers.get("x-vercel-ip-country") || "Unknown";
+      const city = ctx.headers.get("x-vercel-ip-city") || "Unknown";
 
       const parser = new UAParser(userAgent);
       const ua = parser.getResult();
@@ -311,8 +312,8 @@ export const urlsRouter = createTRPCRouter({
             device: ua.device.type || "desktop",
             browser: ua.browser.name || "Unknown",
             os: ua.os.name || "Unknown",
-            country: country || "Unknown",
-            city: city || "Unknown",
+            country: country,
+            city: city,
           },
         }),
       ]);

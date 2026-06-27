@@ -79,18 +79,18 @@ const AnalyticsDashboardChart = ({ items }: { items: UrlWithClicks[] }) => {
             <TrendingUpIcon className="size-4 text-blue-500" />
           </div>
           <h3 className="text-xs font-bold uppercase tracking-tight text-muted-foreground">
-            Traffic Distribution
+            Top Links Performance
           </h3>
         </div>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}
-          margin={{ top: 0, right: 0, left: -20, bottom: 0 }}
+          margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
         >
           <defs>
             <linearGradient id="colorClicks" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.1} />
+              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.2} />
               <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
             </linearGradient>
           </defs>
@@ -100,30 +100,44 @@ const AnalyticsDashboardChart = ({ items }: { items: UrlWithClicks[] }) => {
             stroke="#888888"
             strokeOpacity={0.1}
           />
-          <XAxis dataKey="name" hide />
+
+          <XAxis dataKey="name" hide /> 
+          
           <YAxis
             fontSize={10}
             tickLine={false}
             axisLine={false}
             tick={{ fill: "#888" }}
+            allowDecimals={false}
+            domain={[0, "dataMax + 1"]}
           />
           <Tooltip
+            labelStyle={{ color: "#fff" }}
             contentStyle={{
               backgroundColor: "#18181b",
               borderRadius: "8px",
               border: "1px solid #27272a",
-              color: "#fff",
               fontSize: "12px",
             }}
-            itemStyle={{ color: "#3b82f6" }}
+            itemStyle={{ color: "#3b82f6", fontWeight: "bold" }}
           />
           <Area
             type="monotone"
-            dataKey="clicks"
+            dataKey="clicks" 
             stroke="#3b82f6"
             fillOpacity={1}
             fill="url(#colorClicks)"
             strokeWidth={2}
+            dot={{
+              r: 4,
+              fill: "#3b82f6",
+              strokeWidth: 2,
+              stroke: "#09090b",
+            }}
+            activeDot={{
+              r: 6,
+              strokeWidth: 0,
+            }}
           />
         </AreaChart>
       </ResponsiveContainer>
@@ -151,7 +165,7 @@ export const AnalyticsItem = ({ data }: { data: UrlWithClicks }) => {
                 <MousePointerClickIcon className="size-3" />
                 {data.totalClicks.toLocaleString()} CLICKS
               </div>
-              
+
               <div className="flex items-center gap-1 text-[10px] text-muted-foreground/60 font-medium">
                 <CalendarIcon className="size-3" />
                 <RelativeTime date={data.createdAt} />
