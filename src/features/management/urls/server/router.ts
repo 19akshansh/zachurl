@@ -10,6 +10,8 @@ import z from "zod";
 import { PAGINATION } from "@/config/constants";
 import { TRPCError } from "@trpc/server";
 import { destinationUrlSchema, isAllowedDestinationUrl } from "./validator";
+import { UAParser } from "ua-parser-js";
+
 
 const generateRandomSlug = () => {
   const words = generateSlug(2);
@@ -72,7 +74,7 @@ export const urlsRouter = createTRPCRouter({
             },
           },
         });
-  } catch (error) {
+      } catch (error) {
         console.error("[CREATE_URL_ERROR]", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
@@ -273,20 +275,28 @@ export const urlsRouter = createTRPCRouter({
       return url;
     }),
   resolveAndTrack: unprotectedProcedure
-    .input(z.object({ slug: z.string() }))
+    .input(
+      z.object({
+        slug: z.string(),
+        userAgent: z.string().optional(),
+        ip: z.string().optional(),
+        country: z.string().optional(), 
+        city: z.string().optional(),
+      }),
+    )
     .query(async ({ input }) => {
-      const { slug } = input;
+      const { slug, userAgent, ip, country, city } = input;
 
       const url = await prisma.url.findUnique({
         where: { slug },
       });
 
       if (!url) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "URL not found",
-        });
+        throw new TRPCError({ code: "NOT_FOUND", message: "URL not found" });
       }
+
+      const parser = new UAParser(userAgent);
+      const ua = parser.getResult();
 
       await prisma.$transaction([
         prisma.url.update({
@@ -296,19 +306,16 @@ export const urlsRouter = createTRPCRouter({
         prisma.click.create({
           data: {
             urlId: url.id,
-            device: "Unknown",
-            browser: "Unknown",
-            country: "Unknown",
+            ip: ip,
+            userAgent: userAgent,
+            device: ua.device.type || "desktop",
+            browser: ua.browser.name || "Unknown",
+            os: ua.os.name || "Unknown",
+            country: country || "Unknown",
+            city: city || "Unknown",
           },
         }),
       ]);
-
-      if (!isAllowedDestinationUrl(url.originalUrl)) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: "Invalid destination URL",
-        });
-      }
 
       return { originalUrl: url.originalUrl };
     }),
