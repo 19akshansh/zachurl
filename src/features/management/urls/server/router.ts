@@ -9,7 +9,9 @@ import {
 import z from "zod";
 import { PAGINATION } from "@/config/constants";
 import { TRPCError } from "@trpc/server";
-import { destinationUrlSchema, isAllowedDestinationUrl } from "./validator";
+import { destinationUrlSchema } from "./validator";
+import { UAParser } from "ua-parser-js";
+
 
 const generateRandomSlug = () => {
   const words = generateSlug(2);
@@ -72,7 +74,7 @@ export const urlsRouter = createTRPCRouter({
             },
           },
         });
-  } catch (error) {
+      } catch (error) {
         console.error("[CREATE_URL_ERROR]", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
@@ -273,8 +275,8 @@ export const urlsRouter = createTRPCRouter({
       return url;
     }),
   resolveAndTrack: unprotectedProcedure
-    .input(z.object({ slug: z.string() }))
-    .query(async ({ input }) => {
+    .input(z.object({ slug: z.string() })) 
+    .query(async ({ ctx, input }) => {
       const { slug } = input;
 
       const url = await prisma.url.findUnique({
@@ -282,11 +284,20 @@ export const urlsRouter = createTRPCRouter({
       });
 
       if (!url) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "URL not found",
-        });
+        throw new TRPCError({ code: "NOT_FOUND", message: "URL not found" });
       }
+
+      const userAgent = ctx.headers.get("user-agent") || undefined;
+      const forwarded = ctx.headers.get("x-forwarded-for");
+      const ip = forwarded
+        ? forwarded.split(",")[0]
+        : ctx.headers.get("x-real-ip") || undefined;
+
+      const country = ctx.headers.get("x-vercel-ip-country") || "Unknown";
+      const city = ctx.headers.get("x-vercel-ip-city") || "Unknown";
+
+      const parser = new UAParser(userAgent);
+      const ua = parser.getResult();
 
       await prisma.$transaction([
         prisma.url.update({
@@ -296,19 +307,16 @@ export const urlsRouter = createTRPCRouter({
         prisma.click.create({
           data: {
             urlId: url.id,
-            device: "Unknown",
-            browser: "Unknown",
-            country: "Unknown",
+            ip: ip,
+            userAgent: userAgent,
+            device: ua.device.type || "desktop",
+            browser: ua.browser.name || "Unknown",
+            os: ua.os.name || "Unknown",
+            country: country,
+            city: city,
           },
         }),
       ]);
-
-      if (!isAllowedDestinationUrl(url.originalUrl)) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: "Invalid destination URL",
-        });
-      }
 
       return { originalUrl: url.originalUrl };
     }),

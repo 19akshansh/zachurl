@@ -16,11 +16,13 @@ const Page = async ({ params }: PageProps) => {
     );
 
     redirect(data.originalUrl);
-  } catch (error) {
-    if (error instanceof Error && error.message === "URL not found") {
+  } catch (error: any) {
+    if (
+      error?.data?.code === "NOT_FOUND" ||
+      error?.message === "URL not found"
+    ) {
       notFound();
     }
-
     throw error;
   }
 };

@@ -13,6 +13,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 
   return {
     session,
+    headers: opts.headers,
   };
 };
 

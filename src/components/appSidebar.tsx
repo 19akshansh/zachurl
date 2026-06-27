@@ -46,7 +46,6 @@ const navGroups = [
     label: "Insights",
     items: [
       { title: "Analytics", icon: BarChart3Icon, url: "/analytics" },
-      { title: "Click History", icon: HistoryIcon, url: "/history" },
     ],
   },
   {
