@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Added
-import { toast } from "sonner"; // Added (assumes sonner is installed)
+import { useRouter } from "next/navigation";
+import { toast } from "sonner"; 
 import {
   Link2,
   QrCode,
