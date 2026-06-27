@@ -9,9 +9,8 @@ import {
 import z from "zod";
 import { PAGINATION } from "@/config/constants";
 import { TRPCError } from "@trpc/server";
-import { destinationUrlSchema } from "./validator";
+import { destinationUrlSchema, isAllowedDestinationUrl } from "./validator";
 import { UAParser } from "ua-parser-js";
-
 
 const generateRandomSlug = () => {
   const words = generateSlug(2);
@@ -275,7 +274,7 @@ export const urlsRouter = createTRPCRouter({
       return url;
     }),
   resolveAndTrack: unprotectedProcedure
-    .input(z.object({ slug: z.string() })) 
+    .input(z.object({ slug: z.string() }))
     .query(async ({ ctx, input }) => {
       const { slug } = input;
 
@@ -285,6 +284,13 @@ export const urlsRouter = createTRPCRouter({
 
       if (!url) {
         throw new TRPCError({ code: "NOT_FOUND", message: "URL not found" });
+      }
+
+      if (!isAllowedDestinationUrl(url.originalUrl)) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "The destination URL has an invalid protocol.",
+        });
       }
 
       const userAgent = ctx.headers.get("user-agent") || undefined;

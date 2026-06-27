@@ -48,10 +48,6 @@ const navGroups = [
       { title: "Analytics", icon: BarChart3Icon, url: "/analytics" },
     ],
   },
-  {
-    label: "Configuration",
-    items: [{ title: "Settings", icon: SettingsIcon, url: "/settings" }],
-  },
 ];
 
 export const AppSidebar = () => {

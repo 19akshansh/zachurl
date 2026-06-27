@@ -19,10 +19,12 @@ const Page = async ({ params }: PageProps) => {
   } catch (error: any) {
     if (
       error?.data?.code === "NOT_FOUND" ||
+      error?.data?.code === "BAD_REQUEST" ||
       error?.message === "URL not found"
     ) {
       notFound();
     }
+
     throw error;
   }
 };
