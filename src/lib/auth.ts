@@ -5,6 +5,7 @@ import { transporter } from "./mail";
 import { polarClient } from "./polar";
 import { polar, checkout, portal } from "@polar-sh/better-auth";
 import { envSchem } from "@/config/env";
+import { apiKey } from "@better-auth/api-key";
 
 export const auth = betterAuth({
   baseURL: envSchem.BETTER_AUTH_URL,
@@ -219,6 +220,13 @@ copy and paste this link into your browser:
     },
   },
   plugins: [
+    apiKey({
+      rateLimit: {
+        enabled: true,
+        timeWindow: 1000 * 60 * 60,
+        maxRequests: 100,
+      },
+    }),
     polar({
       client: polarClient,
       createCustomerOnSignUp: true,
