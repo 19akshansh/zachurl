@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   allowedDevOrigins: [
-    "3000-cs-7452aacf-6504-4c6a-8e1c-96d00bb63f05.cs-asia-southeast1-ajrg.cloudshell.dev",
+    "3000-cs-980552378680-default.cs-asia-southeast1-ajrg.cloudshell.dev",
   ],
 };
 

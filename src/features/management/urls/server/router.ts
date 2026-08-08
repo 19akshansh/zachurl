@@ -1,4 +1,3 @@
-import { generateSlug } from "random-word-slugs";
 import prisma from "@/lib/db";
 import {
   createTRPCRouter,
@@ -10,13 +9,8 @@ import z from "zod";
 import { PAGINATION } from "@/config/constants";
 import { TRPCError } from "@trpc/server";
 import { destinationUrlSchema, isAllowedDestinationUrl } from "./validator";
+import { createUrlForUser, getUrlForUser } from "./service";
 import { UAParser } from "ua-parser-js";
-
-const generateRandomSlug = () => {
-  const words = generateSlug(2);
-  const randomStr = Math.random().toString(36).substring(2, 6);
-  return `${words}-${randomStr}`;
-};
 
 export const urlsRouter = createTRPCRouter({
   create: proProcedure
@@ -27,60 +21,13 @@ export const urlsRouter = createTRPCRouter({
         customSlug: z.string().min(3).max(30).optional().or(z.literal("")),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
-      const { originalUrl, name, customSlug } = input;
-
-      const urlCount = await prisma.url.count({
-        where: { userId: ctx.auth.user.id },
-      });
-
-      if (urlCount >= ctx.limits.urls) {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-          message: "URL limit reached. UPGRADE TO PRO.",
-        });
-      }
-
-      const isCustom = customSlug && customSlug.trim().length > 0;
-      const finalSlug = isCustom ? customSlug!.trim() : generateRandomSlug();
-
-      if (isCustom) {
-        const existing = await prisma.url.findUnique({
-          where: { slug: finalSlug },
-        });
-
-        if (existing) {
-          throw new TRPCError({
-            code: "CONFLICT",
-            message:
-              "This custom slug is already in use. Please try another one.",
-          });
-        }
-      }
-
-      try {
-        return await prisma.url.create({
-          data: {
-            name: name || generateSlug(2),
-            originalUrl,
-            slug: finalSlug,
-            userId: ctx.auth.user.id,
-            qrCode: {
-              create: {
-                fgColor: "#000000",
-                bgColor: "#FFFFFF",
-              },
-            },
-          },
-        });
-      } catch (error) {
-        console.error("[CREATE_URL_ERROR]", error);
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Failed to create URL. Please try again later.",
-        });
-      }
-    }),
+    .mutation(async ({ ctx, input }) =>
+      createUrlForUser({
+        userId: ctx.auth.user.id,
+        limit: ctx.limits.urls,
+        input,
+      }),
+    ),
   getMany: protectedProcedure
     .input(
       z.object({
@@ -137,32 +84,9 @@ export const urlsRouter = createTRPCRouter({
     }),
   getOne: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const url = await prisma.url.findFirst({
-        where: {
-          id: input.id,
-          userId: ctx.auth.user.id,
-        },
-        include: {
-          qrCode: true,
-          clicks: {
-            take: 10,
-            orderBy: {
-              timestamp: "desc",
-            },
-          },
-        },
-      });
-
-      if (!url) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "URL not found",
-        });
-      }
-
-      return url;
-    }),
+    .query(async ({ ctx, input }) =>
+      getUrlForUser(ctx.auth.user.id, input.id),
+    ),
   update: protectedProcedure
     .input(
       z.object({

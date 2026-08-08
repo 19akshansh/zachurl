@@ -1,6 +1,6 @@
 {
   "name": "zachurl",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
+    "@better-auth/api-key": "^1.6.25",
     "@hookform/resolvers": "^5.4.0",
     "@polar-sh/better-auth": "^1.8.4",
     "@polar-sh/sdk": "^0.47.1",

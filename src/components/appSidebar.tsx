@@ -11,6 +11,7 @@ import {
   PlusCircleIcon,
   UserIcon,
   StarIcon,
+  KeyRoundIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -40,6 +41,7 @@ const navGroups = [
     items: [
       { title: "All Links", icon: Link2Icon, url: "/urls" },
       { title: "QR Codes", icon: QrCodeIcon, url: "/qr-codes" },
+      { title: "API Keys", icon: KeyRoundIcon, url: "/api-keys" },
     ],
   },
   {
