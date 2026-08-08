@@ -53,7 +53,7 @@ export type QrCode = Prisma.QrCodeModel
  */
 export type Click = Prisma.ClickModel
 /**
- * Model ApiKey
+ * Model Apikey
  * 
  */
-export type ApiKey = Prisma.ApiKeyModel
+export type Apikey = Prisma.ApikeyModel

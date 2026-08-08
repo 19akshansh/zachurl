@@ -4,7 +4,7 @@
 // biome-ignore-all lint: generated file
 // @ts-nocheck 
 /*
- * This file exports the `ApiKey` model and its related types.
+ * This file exports the `Apikey` model and its related types.
  *
  * 🟢 You can import this file directly.
  */
@@ -13,20 +13,20 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
- * Model ApiKey
+ * Model Apikey
  * 
  */
-export type ApiKeyModel = runtime.Types.Result.DefaultSelection<Prisma.$ApiKeyPayload>
+export type ApikeyModel = runtime.Types.Result.DefaultSelection<Prisma.$ApikeyPayload>
 
-export type AggregateApiKey = {
-  _count: ApiKeyCountAggregateOutputType | null
-  _avg: ApiKeyAvgAggregateOutputType | null
-  _sum: ApiKeySumAggregateOutputType | null
-  _min: ApiKeyMinAggregateOutputType | null
-  _max: ApiKeyMaxAggregateOutputType | null
+export type AggregateApikey = {
+  _count: ApikeyCountAggregateOutputType | null
+  _avg: ApikeyAvgAggregateOutputType | null
+  _sum: ApikeySumAggregateOutputType | null
+  _min: ApikeyMinAggregateOutputType | null
+  _max: ApikeyMaxAggregateOutputType | null
 }
 
-export type ApiKeyAvgAggregateOutputType = {
+export type ApikeyAvgAggregateOutputType = {
   refillInterval: number | null
   refillAmount: number | null
   rateLimitTimeWindow: number | null
@@ -35,7 +35,7 @@ export type ApiKeyAvgAggregateOutputType = {
   remaining: number | null
 }
 
-export type ApiKeySumAggregateOutputType = {
+export type ApikeySumAggregateOutputType = {
   refillInterval: number | null
   refillAmount: number | null
   rateLimitTimeWindow: number | null
@@ -44,7 +44,7 @@ export type ApiKeySumAggregateOutputType = {
   remaining: number | null
 }
 
-export type ApiKeyMinAggregateOutputType = {
+export type ApikeyMinAggregateOutputType = {
   id: string | null
   configId: string | null
   name: string | null
@@ -69,7 +69,7 @@ export type ApiKeyMinAggregateOutputType = {
   metadata: string | null
 }
 
-export type ApiKeyMaxAggregateOutputType = {
+export type ApikeyMaxAggregateOutputType = {
   id: string | null
   configId: string | null
   name: string | null
@@ -94,7 +94,7 @@ export type ApiKeyMaxAggregateOutputType = {
   metadata: string | null
 }
 
-export type ApiKeyCountAggregateOutputType = {
+export type ApikeyCountAggregateOutputType = {
   id: number
   configId: number
   name: number
@@ -121,7 +121,7 @@ export type ApiKeyCountAggregateOutputType = {
 }
 
 
-export type ApiKeyAvgAggregateInputType = {
+export type ApikeyAvgAggregateInputType = {
   refillInterval?: true
   refillAmount?: true
   rateLimitTimeWindow?: true
@@ -130,7 +130,7 @@ export type ApiKeyAvgAggregateInputType = {
   remaining?: true
 }
 
-export type ApiKeySumAggregateInputType = {
+export type ApikeySumAggregateInputType = {
   refillInterval?: true
   refillAmount?: true
   rateLimitTimeWindow?: true
@@ -139,7 +139,7 @@ export type ApiKeySumAggregateInputType = {
   remaining?: true
 }
 
-export type ApiKeyMinAggregateInputType = {
+export type ApikeyMinAggregateInputType = {
   id?: true
   configId?: true
   name?: true
@@ -164,7 +164,7 @@ export type ApiKeyMinAggregateInputType = {
   metadata?: true
 }
 
-export type ApiKeyMaxAggregateInputType = {
+export type ApikeyMaxAggregateInputType = {
   id?: true
   configId?: true
   name?: true
@@ -189,7 +189,7 @@ export type ApiKeyMaxAggregateInputType = {
   metadata?: true
 }
 
-export type ApiKeyCountAggregateInputType = {
+export type ApikeyCountAggregateInputType = {
   id?: true
   configId?: true
   name?: true
@@ -215,93 +215,93 @@ export type ApiKeyCountAggregateInputType = {
   _all?: true
 }
 
-export type ApiKeyAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which ApiKey to aggregate.
+   * Filter which Apikey to aggregate.
    */
-  where?: Prisma.ApiKeyWhereInput
+  where?: Prisma.ApikeyWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of ApiKeys to fetch.
+   * Determine the order of Apikeys to fetch.
    */
-  orderBy?: Prisma.ApiKeyOrderByWithRelationInput | Prisma.ApiKeyOrderByWithRelationInput[]
+  orderBy?: Prisma.ApikeyOrderByWithRelationInput | Prisma.ApikeyOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
    * Sets the start position
    */
-  cursor?: Prisma.ApiKeyWhereUniqueInput
+  cursor?: Prisma.ApikeyWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` ApiKeys from the position of the cursor.
+   * Take `±n` Apikeys from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` ApiKeys.
+   * Skip the first `n` Apikeys.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Count returned ApiKeys
+   * Count returned Apikeys
   **/
-  _count?: true | ApiKeyCountAggregateInputType
+  _count?: true | ApikeyCountAggregateInputType
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
    * Select which fields to average
   **/
-  _avg?: ApiKeyAvgAggregateInputType
+  _avg?: ApikeyAvgAggregateInputType
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
    * Select which fields to sum
   **/
-  _sum?: ApiKeySumAggregateInputType
+  _sum?: ApikeySumAggregateInputType
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
    * Select which fields to find the minimum value
   **/
-  _min?: ApiKeyMinAggregateInputType
+  _min?: ApikeyMinAggregateInputType
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
    * Select which fields to find the maximum value
   **/
-  _max?: ApiKeyMaxAggregateInputType
+  _max?: ApikeyMaxAggregateInputType
 }
 
-export type GetApiKeyAggregateType<T extends ApiKeyAggregateArgs> = {
-      [P in keyof T & keyof AggregateApiKey]: P extends '_count' | 'count'
+export type GetApikeyAggregateType<T extends ApikeyAggregateArgs> = {
+      [P in keyof T & keyof AggregateApikey]: P extends '_count' | 'count'
     ? T[P] extends true
       ? number
-      : Prisma.GetScalarType<T[P], AggregateApiKey[P]>
-    : Prisma.GetScalarType<T[P], AggregateApiKey[P]>
+      : Prisma.GetScalarType<T[P], AggregateApikey[P]>
+    : Prisma.GetScalarType<T[P], AggregateApikey[P]>
 }
 
 
 
 
-export type ApiKeyGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ApiKeyWhereInput
-  orderBy?: Prisma.ApiKeyOrderByWithAggregationInput | Prisma.ApiKeyOrderByWithAggregationInput[]
-  by: Prisma.ApiKeyScalarFieldEnum[] | Prisma.ApiKeyScalarFieldEnum
-  having?: Prisma.ApiKeyScalarWhereWithAggregatesInput
+export type ApikeyGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ApikeyWhereInput
+  orderBy?: Prisma.ApikeyOrderByWithAggregationInput | Prisma.ApikeyOrderByWithAggregationInput[]
+  by: Prisma.ApikeyScalarFieldEnum[] | Prisma.ApikeyScalarFieldEnum
+  having?: Prisma.ApikeyScalarWhereWithAggregatesInput
   take?: number
   skip?: number
-  _count?: ApiKeyCountAggregateInputType | true
-  _avg?: ApiKeyAvgAggregateInputType
-  _sum?: ApiKeySumAggregateInputType
-  _min?: ApiKeyMinAggregateInputType
-  _max?: ApiKeyMaxAggregateInputType
+  _count?: ApikeyCountAggregateInputType | true
+  _avg?: ApikeyAvgAggregateInputType
+  _sum?: ApikeySumAggregateInputType
+  _min?: ApikeyMinAggregateInputType
+  _max?: ApikeyMaxAggregateInputType
 }
 
-export type ApiKeyGroupByOutputType = {
+export type ApikeyGroupByOutputType = {
   id: string
   configId: string
   name: string | null
@@ -324,57 +324,57 @@ export type ApiKeyGroupByOutputType = {
   updatedAt: Date
   permissions: string | null
   metadata: string | null
-  _count: ApiKeyCountAggregateOutputType | null
-  _avg: ApiKeyAvgAggregateOutputType | null
-  _sum: ApiKeySumAggregateOutputType | null
-  _min: ApiKeyMinAggregateOutputType | null
-  _max: ApiKeyMaxAggregateOutputType | null
+  _count: ApikeyCountAggregateOutputType | null
+  _avg: ApikeyAvgAggregateOutputType | null
+  _sum: ApikeySumAggregateOutputType | null
+  _min: ApikeyMinAggregateOutputType | null
+  _max: ApikeyMaxAggregateOutputType | null
 }
 
-export type GetApiKeyGroupByPayload<T extends ApiKeyGroupByArgs> = Prisma.PrismaPromise<
+export type GetApikeyGroupByPayload<T extends ApikeyGroupByArgs> = Prisma.PrismaPromise<
   Array<
-    Prisma.PickEnumerable<ApiKeyGroupByOutputType, T['by']> &
+    Prisma.PickEnumerable<ApikeyGroupByOutputType, T['by']> &
       {
-        [P in ((keyof T) & (keyof ApiKeyGroupByOutputType))]: P extends '_count'
+        [P in ((keyof T) & (keyof ApikeyGroupByOutputType))]: P extends '_count'
           ? T[P] extends boolean
             ? number
-            : Prisma.GetScalarType<T[P], ApiKeyGroupByOutputType[P]>
-          : Prisma.GetScalarType<T[P], ApiKeyGroupByOutputType[P]>
+            : Prisma.GetScalarType<T[P], ApikeyGroupByOutputType[P]>
+          : Prisma.GetScalarType<T[P], ApikeyGroupByOutputType[P]>
       }
     >
   >
 
 
 
-export type ApiKeyWhereInput = {
-  AND?: Prisma.ApiKeyWhereInput | Prisma.ApiKeyWhereInput[]
-  OR?: Prisma.ApiKeyWhereInput[]
-  NOT?: Prisma.ApiKeyWhereInput | Prisma.ApiKeyWhereInput[]
-  id?: Prisma.StringFilter<"ApiKey"> | string
-  configId?: Prisma.StringFilter<"ApiKey"> | string
-  name?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  start?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  prefix?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  key?: Prisma.StringFilter<"ApiKey"> | string
-  referenceId?: Prisma.StringFilter<"ApiKey"> | string
-  refillInterval?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  refillAmount?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  lastRefillAt?: Prisma.DateTimeNullableFilter<"ApiKey"> | Date | string | null
-  enabled?: Prisma.BoolFilter<"ApiKey"> | boolean
-  rateLimitEnabled?: Prisma.BoolFilter<"ApiKey"> | boolean
-  rateLimitTimeWindow?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  rateLimitMax?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  requestCount?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  remaining?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  lastRequest?: Prisma.DateTimeNullableFilter<"ApiKey"> | Date | string | null
-  expiresAt?: Prisma.DateTimeNullableFilter<"ApiKey"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"ApiKey"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ApiKey"> | Date | string
-  permissions?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  metadata?: Prisma.StringNullableFilter<"ApiKey"> | string | null
+export type ApikeyWhereInput = {
+  AND?: Prisma.ApikeyWhereInput | Prisma.ApikeyWhereInput[]
+  OR?: Prisma.ApikeyWhereInput[]
+  NOT?: Prisma.ApikeyWhereInput | Prisma.ApikeyWhereInput[]
+  id?: Prisma.StringFilter<"Apikey"> | string
+  configId?: Prisma.StringFilter<"Apikey"> | string
+  name?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  start?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  prefix?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  key?: Prisma.StringFilter<"Apikey"> | string
+  referenceId?: Prisma.StringFilter<"Apikey"> | string
+  refillInterval?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  refillAmount?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  lastRefillAt?: Prisma.DateTimeNullableFilter<"Apikey"> | Date | string | null
+  enabled?: Prisma.BoolFilter<"Apikey"> | boolean
+  rateLimitEnabled?: Prisma.BoolFilter<"Apikey"> | boolean
+  rateLimitTimeWindow?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  rateLimitMax?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  requestCount?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  remaining?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  lastRequest?: Prisma.DateTimeNullableFilter<"Apikey"> | Date | string | null
+  expiresAt?: Prisma.DateTimeNullableFilter<"Apikey"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Apikey"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Apikey"> | Date | string
+  permissions?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  metadata?: Prisma.StringNullableFilter<"Apikey"> | string | null
 }
 
-export type ApiKeyOrderByWithRelationInput = {
+export type ApikeyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   configId?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -399,35 +399,35 @@ export type ApiKeyOrderByWithRelationInput = {
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
-export type ApiKeyWhereUniqueInput = Prisma.AtLeast<{
+export type ApikeyWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  AND?: Prisma.ApiKeyWhereInput | Prisma.ApiKeyWhereInput[]
-  OR?: Prisma.ApiKeyWhereInput[]
-  NOT?: Prisma.ApiKeyWhereInput | Prisma.ApiKeyWhereInput[]
-  configId?: Prisma.StringFilter<"ApiKey"> | string
-  name?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  start?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  prefix?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  key?: Prisma.StringFilter<"ApiKey"> | string
-  referenceId?: Prisma.StringFilter<"ApiKey"> | string
-  refillInterval?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  refillAmount?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  lastRefillAt?: Prisma.DateTimeNullableFilter<"ApiKey"> | Date | string | null
-  enabled?: Prisma.BoolFilter<"ApiKey"> | boolean
-  rateLimitEnabled?: Prisma.BoolFilter<"ApiKey"> | boolean
-  rateLimitTimeWindow?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  rateLimitMax?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  requestCount?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  remaining?: Prisma.IntNullableFilter<"ApiKey"> | number | null
-  lastRequest?: Prisma.DateTimeNullableFilter<"ApiKey"> | Date | string | null
-  expiresAt?: Prisma.DateTimeNullableFilter<"ApiKey"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"ApiKey"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ApiKey"> | Date | string
-  permissions?: Prisma.StringNullableFilter<"ApiKey"> | string | null
-  metadata?: Prisma.StringNullableFilter<"ApiKey"> | string | null
+  AND?: Prisma.ApikeyWhereInput | Prisma.ApikeyWhereInput[]
+  OR?: Prisma.ApikeyWhereInput[]
+  NOT?: Prisma.ApikeyWhereInput | Prisma.ApikeyWhereInput[]
+  configId?: Prisma.StringFilter<"Apikey"> | string
+  name?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  start?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  prefix?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  key?: Prisma.StringFilter<"Apikey"> | string
+  referenceId?: Prisma.StringFilter<"Apikey"> | string
+  refillInterval?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  refillAmount?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  lastRefillAt?: Prisma.DateTimeNullableFilter<"Apikey"> | Date | string | null
+  enabled?: Prisma.BoolFilter<"Apikey"> | boolean
+  rateLimitEnabled?: Prisma.BoolFilter<"Apikey"> | boolean
+  rateLimitTimeWindow?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  rateLimitMax?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  requestCount?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  remaining?: Prisma.IntNullableFilter<"Apikey"> | number | null
+  lastRequest?: Prisma.DateTimeNullableFilter<"Apikey"> | Date | string | null
+  expiresAt?: Prisma.DateTimeNullableFilter<"Apikey"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Apikey"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Apikey"> | Date | string
+  permissions?: Prisma.StringNullableFilter<"Apikey"> | string | null
+  metadata?: Prisma.StringNullableFilter<"Apikey"> | string | null
 }, "id">
 
-export type ApiKeyOrderByWithAggregationInput = {
+export type ApikeyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   configId?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -450,42 +450,42 @@ export type ApiKeyOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   permissions?: Prisma.SortOrderInput | Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
-  _count?: Prisma.ApiKeyCountOrderByAggregateInput
-  _avg?: Prisma.ApiKeyAvgOrderByAggregateInput
-  _max?: Prisma.ApiKeyMaxOrderByAggregateInput
-  _min?: Prisma.ApiKeyMinOrderByAggregateInput
-  _sum?: Prisma.ApiKeySumOrderByAggregateInput
+  _count?: Prisma.ApikeyCountOrderByAggregateInput
+  _avg?: Prisma.ApikeyAvgOrderByAggregateInput
+  _max?: Prisma.ApikeyMaxOrderByAggregateInput
+  _min?: Prisma.ApikeyMinOrderByAggregateInput
+  _sum?: Prisma.ApikeySumOrderByAggregateInput
 }
 
-export type ApiKeyScalarWhereWithAggregatesInput = {
-  AND?: Prisma.ApiKeyScalarWhereWithAggregatesInput | Prisma.ApiKeyScalarWhereWithAggregatesInput[]
-  OR?: Prisma.ApiKeyScalarWhereWithAggregatesInput[]
-  NOT?: Prisma.ApiKeyScalarWhereWithAggregatesInput | Prisma.ApiKeyScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ApiKey"> | string
-  configId?: Prisma.StringWithAggregatesFilter<"ApiKey"> | string
-  name?: Prisma.StringNullableWithAggregatesFilter<"ApiKey"> | string | null
-  start?: Prisma.StringNullableWithAggregatesFilter<"ApiKey"> | string | null
-  prefix?: Prisma.StringNullableWithAggregatesFilter<"ApiKey"> | string | null
-  key?: Prisma.StringWithAggregatesFilter<"ApiKey"> | string
-  referenceId?: Prisma.StringWithAggregatesFilter<"ApiKey"> | string
-  refillInterval?: Prisma.IntNullableWithAggregatesFilter<"ApiKey"> | number | null
-  refillAmount?: Prisma.IntNullableWithAggregatesFilter<"ApiKey"> | number | null
-  lastRefillAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ApiKey"> | Date | string | null
-  enabled?: Prisma.BoolWithAggregatesFilter<"ApiKey"> | boolean
-  rateLimitEnabled?: Prisma.BoolWithAggregatesFilter<"ApiKey"> | boolean
-  rateLimitTimeWindow?: Prisma.IntNullableWithAggregatesFilter<"ApiKey"> | number | null
-  rateLimitMax?: Prisma.IntNullableWithAggregatesFilter<"ApiKey"> | number | null
-  requestCount?: Prisma.IntNullableWithAggregatesFilter<"ApiKey"> | number | null
-  remaining?: Prisma.IntNullableWithAggregatesFilter<"ApiKey"> | number | null
-  lastRequest?: Prisma.DateTimeNullableWithAggregatesFilter<"ApiKey"> | Date | string | null
-  expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ApiKey"> | Date | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ApiKey"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ApiKey"> | Date | string
-  permissions?: Prisma.StringNullableWithAggregatesFilter<"ApiKey"> | string | null
-  metadata?: Prisma.StringNullableWithAggregatesFilter<"ApiKey"> | string | null
+export type ApikeyScalarWhereWithAggregatesInput = {
+  AND?: Prisma.ApikeyScalarWhereWithAggregatesInput | Prisma.ApikeyScalarWhereWithAggregatesInput[]
+  OR?: Prisma.ApikeyScalarWhereWithAggregatesInput[]
+  NOT?: Prisma.ApikeyScalarWhereWithAggregatesInput | Prisma.ApikeyScalarWhereWithAggregatesInput[]
+  id?: Prisma.StringWithAggregatesFilter<"Apikey"> | string
+  configId?: Prisma.StringWithAggregatesFilter<"Apikey"> | string
+  name?: Prisma.StringNullableWithAggregatesFilter<"Apikey"> | string | null
+  start?: Prisma.StringNullableWithAggregatesFilter<"Apikey"> | string | null
+  prefix?: Prisma.StringNullableWithAggregatesFilter<"Apikey"> | string | null
+  key?: Prisma.StringWithAggregatesFilter<"Apikey"> | string
+  referenceId?: Prisma.StringWithAggregatesFilter<"Apikey"> | string
+  refillInterval?: Prisma.IntNullableWithAggregatesFilter<"Apikey"> | number | null
+  refillAmount?: Prisma.IntNullableWithAggregatesFilter<"Apikey"> | number | null
+  lastRefillAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Apikey"> | Date | string | null
+  enabled?: Prisma.BoolWithAggregatesFilter<"Apikey"> | boolean
+  rateLimitEnabled?: Prisma.BoolWithAggregatesFilter<"Apikey"> | boolean
+  rateLimitTimeWindow?: Prisma.IntNullableWithAggregatesFilter<"Apikey"> | number | null
+  rateLimitMax?: Prisma.IntNullableWithAggregatesFilter<"Apikey"> | number | null
+  requestCount?: Prisma.IntNullableWithAggregatesFilter<"Apikey"> | number | null
+  remaining?: Prisma.IntNullableWithAggregatesFilter<"Apikey"> | number | null
+  lastRequest?: Prisma.DateTimeNullableWithAggregatesFilter<"Apikey"> | Date | string | null
+  expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Apikey"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Apikey"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Apikey"> | Date | string
+  permissions?: Prisma.StringNullableWithAggregatesFilter<"Apikey"> | string | null
+  metadata?: Prisma.StringNullableWithAggregatesFilter<"Apikey"> | string | null
 }
 
-export type ApiKeyCreateInput = {
+export type ApikeyCreateInput = {
   id: string
   configId?: string
   name?: string | null
@@ -510,7 +510,7 @@ export type ApiKeyCreateInput = {
   metadata?: string | null
 }
 
-export type ApiKeyUncheckedCreateInput = {
+export type ApikeyUncheckedCreateInput = {
   id: string
   configId?: string
   name?: string | null
@@ -535,7 +535,7 @@ export type ApiKeyUncheckedCreateInput = {
   metadata?: string | null
 }
 
-export type ApiKeyUpdateInput = {
+export type ApikeyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -560,7 +560,7 @@ export type ApiKeyUpdateInput = {
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type ApiKeyUncheckedUpdateInput = {
+export type ApikeyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -585,7 +585,7 @@ export type ApiKeyUncheckedUpdateInput = {
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type ApiKeyCreateManyInput = {
+export type ApikeyCreateManyInput = {
   id: string
   configId?: string
   name?: string | null
@@ -610,7 +610,7 @@ export type ApiKeyCreateManyInput = {
   metadata?: string | null
 }
 
-export type ApiKeyUpdateManyMutationInput = {
+export type ApikeyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -635,7 +635,7 @@ export type ApiKeyUpdateManyMutationInput = {
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type ApiKeyUncheckedUpdateManyInput = {
+export type ApikeyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -660,7 +660,7 @@ export type ApiKeyUncheckedUpdateManyInput = {
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type ApiKeyCountOrderByAggregateInput = {
+export type ApikeyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   configId?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -685,7 +685,7 @@ export type ApiKeyCountOrderByAggregateInput = {
   metadata?: Prisma.SortOrder
 }
 
-export type ApiKeyAvgOrderByAggregateInput = {
+export type ApikeyAvgOrderByAggregateInput = {
   refillInterval?: Prisma.SortOrder
   refillAmount?: Prisma.SortOrder
   rateLimitTimeWindow?: Prisma.SortOrder
@@ -694,7 +694,7 @@ export type ApiKeyAvgOrderByAggregateInput = {
   remaining?: Prisma.SortOrder
 }
 
-export type ApiKeyMaxOrderByAggregateInput = {
+export type ApikeyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   configId?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -719,7 +719,7 @@ export type ApiKeyMaxOrderByAggregateInput = {
   metadata?: Prisma.SortOrder
 }
 
-export type ApiKeyMinOrderByAggregateInput = {
+export type ApikeyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   configId?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -744,7 +744,7 @@ export type ApiKeyMinOrderByAggregateInput = {
   metadata?: Prisma.SortOrder
 }
 
-export type ApiKeySumOrderByAggregateInput = {
+export type ApikeySumOrderByAggregateInput = {
   refillInterval?: Prisma.SortOrder
   refillAmount?: Prisma.SortOrder
   rateLimitTimeWindow?: Prisma.SortOrder
@@ -763,7 +763,7 @@ export type NullableIntFieldUpdateOperationsInput = {
 
 
 
-export type ApiKeySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type ApikeySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   configId?: boolean
   name?: boolean
@@ -786,9 +786,9 @@ export type ApiKeySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   permissions?: boolean
   metadata?: boolean
-}, ExtArgs["result"]["apiKey"]>
+}, ExtArgs["result"]["apikey"]>
 
-export type ApiKeySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type ApikeySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   configId?: boolean
   name?: boolean
@@ -811,9 +811,9 @@ export type ApiKeySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updatedAt?: boolean
   permissions?: boolean
   metadata?: boolean
-}, ExtArgs["result"]["apiKey"]>
+}, ExtArgs["result"]["apikey"]>
 
-export type ApiKeySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type ApikeySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   configId?: boolean
   name?: boolean
@@ -836,9 +836,9 @@ export type ApiKeySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updatedAt?: boolean
   permissions?: boolean
   metadata?: boolean
-}, ExtArgs["result"]["apiKey"]>
+}, ExtArgs["result"]["apikey"]>
 
-export type ApiKeySelectScalar = {
+export type ApikeySelectScalar = {
   id?: boolean
   configId?: boolean
   name?: boolean
@@ -863,10 +863,10 @@ export type ApiKeySelectScalar = {
   metadata?: boolean
 }
 
-export type ApiKeyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "configId" | "name" | "start" | "prefix" | "key" | "referenceId" | "refillInterval" | "refillAmount" | "lastRefillAt" | "enabled" | "rateLimitEnabled" | "rateLimitTimeWindow" | "rateLimitMax" | "requestCount" | "remaining" | "lastRequest" | "expiresAt" | "createdAt" | "updatedAt" | "permissions" | "metadata", ExtArgs["result"]["apiKey"]>
+export type ApikeyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "configId" | "name" | "start" | "prefix" | "key" | "referenceId" | "refillInterval" | "refillAmount" | "lastRefillAt" | "enabled" | "rateLimitEnabled" | "rateLimitTimeWindow" | "rateLimitMax" | "requestCount" | "remaining" | "lastRequest" | "expiresAt" | "createdAt" | "updatedAt" | "permissions" | "metadata", ExtArgs["result"]["apikey"]>
 
-export type $ApiKeyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  name: "ApiKey"
+export type $ApikeyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  name: "Apikey"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -891,136 +891,136 @@ export type $ApiKeyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     updatedAt: Date
     permissions: string | null
     metadata: string | null
-  }, ExtArgs["result"]["apiKey"]>
+  }, ExtArgs["result"]["apikey"]>
   composites: {}
 }
 
-export type ApiKeyGetPayload<S extends boolean | null | undefined | ApiKeyDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload, S>
+export type ApikeyGetPayload<S extends boolean | null | undefined | ApikeyDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$ApikeyPayload, S>
 
-export type ApiKeyCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  Omit<ApiKeyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-    select?: ApiKeyCountAggregateInputType | true
+export type ApikeyCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  Omit<ApikeyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: ApikeyCountAggregateInputType | true
   }
 
-export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ApiKey'], meta: { name: 'ApiKey' } }
+export interface ApikeyDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Apikey'], meta: { name: 'Apikey' } }
   /**
-   * Find zero or one ApiKey that matches the filter.
-   * @param {ApiKeyFindUniqueArgs} args - Arguments to find a ApiKey
+   * Find zero or one Apikey that matches the filter.
+   * @param {ApikeyFindUniqueArgs} args - Arguments to find a Apikey
    * @example
-   * // Get one ApiKey
-   * const apiKey = await prisma.apiKey.findUnique({
+   * // Get one Apikey
+   * const apikey = await prisma.apikey.findUnique({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
    */
-  findUnique<T extends ApiKeyFindUniqueArgs>(args: Prisma.SelectSubset<T, ApiKeyFindUniqueArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findUnique<T extends ApikeyFindUniqueArgs>(args: Prisma.SelectSubset<T, ApikeyFindUniqueArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
-   * Find one ApiKey that matches the filter or throw an error with `error.code='P2025'`
+   * Find one Apikey that matches the filter or throw an error with `error.code='P2025'`
    * if no matches were found.
-   * @param {ApiKeyFindUniqueOrThrowArgs} args - Arguments to find a ApiKey
+   * @param {ApikeyFindUniqueOrThrowArgs} args - Arguments to find a Apikey
    * @example
-   * // Get one ApiKey
-   * const apiKey = await prisma.apiKey.findUniqueOrThrow({
+   * // Get one Apikey
+   * const apikey = await prisma.apikey.findUniqueOrThrow({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
    */
-  findUniqueOrThrow<T extends ApiKeyFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, ApiKeyFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findUniqueOrThrow<T extends ApikeyFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, ApikeyFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
-   * Find the first ApiKey that matches the filter.
+   * Find the first Apikey that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ApiKeyFindFirstArgs} args - Arguments to find a ApiKey
+   * @param {ApikeyFindFirstArgs} args - Arguments to find a Apikey
    * @example
-   * // Get one ApiKey
-   * const apiKey = await prisma.apiKey.findFirst({
+   * // Get one Apikey
+   * const apikey = await prisma.apikey.findFirst({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
    */
-  findFirst<T extends ApiKeyFindFirstArgs>(args?: Prisma.SelectSubset<T, ApiKeyFindFirstArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findFirst<T extends ApikeyFindFirstArgs>(args?: Prisma.SelectSubset<T, ApikeyFindFirstArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
-   * Find the first ApiKey that matches the filter or
+   * Find the first Apikey that matches the filter or
    * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ApiKeyFindFirstOrThrowArgs} args - Arguments to find a ApiKey
+   * @param {ApikeyFindFirstOrThrowArgs} args - Arguments to find a Apikey
    * @example
-   * // Get one ApiKey
-   * const apiKey = await prisma.apiKey.findFirstOrThrow({
+   * // Get one Apikey
+   * const apikey = await prisma.apikey.findFirstOrThrow({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
    */
-  findFirstOrThrow<T extends ApiKeyFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, ApiKeyFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findFirstOrThrow<T extends ApikeyFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, ApikeyFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
-   * Find zero or more ApiKeys that matches the filter.
+   * Find zero or more Apikeys that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ApiKeyFindManyArgs} args - Arguments to filter and select certain fields only.
+   * @param {ApikeyFindManyArgs} args - Arguments to filter and select certain fields only.
    * @example
-   * // Get all ApiKeys
-   * const apiKeys = await prisma.apiKey.findMany()
+   * // Get all Apikeys
+   * const apikeys = await prisma.apikey.findMany()
    * 
-   * // Get first 10 ApiKeys
-   * const apiKeys = await prisma.apiKey.findMany({ take: 10 })
+   * // Get first 10 Apikeys
+   * const apikeys = await prisma.apikey.findMany({ take: 10 })
    * 
    * // Only select the `id`
-   * const apiKeyWithIdOnly = await prisma.apiKey.findMany({ select: { id: true } })
+   * const apikeyWithIdOnly = await prisma.apikey.findMany({ select: { id: true } })
    * 
    */
-  findMany<T extends ApiKeyFindManyArgs>(args?: Prisma.SelectSubset<T, ApiKeyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+  findMany<T extends ApikeyFindManyArgs>(args?: Prisma.SelectSubset<T, ApikeyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
   /**
-   * Create a ApiKey.
-   * @param {ApiKeyCreateArgs} args - Arguments to create a ApiKey.
+   * Create a Apikey.
+   * @param {ApikeyCreateArgs} args - Arguments to create a Apikey.
    * @example
-   * // Create one ApiKey
-   * const ApiKey = await prisma.apiKey.create({
+   * // Create one Apikey
+   * const Apikey = await prisma.apikey.create({
    *   data: {
-   *     // ... data to create a ApiKey
+   *     // ... data to create a Apikey
    *   }
    * })
    * 
    */
-  create<T extends ApiKeyCreateArgs>(args: Prisma.SelectSubset<T, ApiKeyCreateArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  create<T extends ApikeyCreateArgs>(args: Prisma.SelectSubset<T, ApikeyCreateArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
-   * Create many ApiKeys.
-   * @param {ApiKeyCreateManyArgs} args - Arguments to create many ApiKeys.
+   * Create many Apikeys.
+   * @param {ApikeyCreateManyArgs} args - Arguments to create many Apikeys.
    * @example
-   * // Create many ApiKeys
-   * const apiKey = await prisma.apiKey.createMany({
+   * // Create many Apikeys
+   * const apikey = await prisma.apikey.createMany({
    *   data: [
    *     // ... provide data here
    *   ]
    * })
    *     
    */
-  createMany<T extends ApiKeyCreateManyArgs>(args?: Prisma.SelectSubset<T, ApiKeyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  createMany<T extends ApikeyCreateManyArgs>(args?: Prisma.SelectSubset<T, ApikeyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many ApiKeys and returns the data saved in the database.
-   * @param {ApiKeyCreateManyAndReturnArgs} args - Arguments to create many ApiKeys.
+   * Create many Apikeys and returns the data saved in the database.
+   * @param {ApikeyCreateManyAndReturnArgs} args - Arguments to create many Apikeys.
    * @example
-   * // Create many ApiKeys
-   * const apiKey = await prisma.apiKey.createManyAndReturn({
+   * // Create many Apikeys
+   * const apikey = await prisma.apikey.createManyAndReturn({
    *   data: [
    *     // ... provide data here
    *   ]
    * })
    * 
-   * // Create many ApiKeys and only return the `id`
-   * const apiKeyWithIdOnly = await prisma.apiKey.createManyAndReturn({
+   * // Create many Apikeys and only return the `id`
+   * const apikeyWithIdOnly = await prisma.apikey.createManyAndReturn({
    *   select: { id: true },
    *   data: [
    *     // ... provide data here
@@ -1030,28 +1030,28 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  createManyAndReturn<T extends ApiKeyCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ApiKeyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+  createManyAndReturn<T extends ApikeyCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ApikeyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
   /**
-   * Delete a ApiKey.
-   * @param {ApiKeyDeleteArgs} args - Arguments to delete one ApiKey.
+   * Delete a Apikey.
+   * @param {ApikeyDeleteArgs} args - Arguments to delete one Apikey.
    * @example
-   * // Delete one ApiKey
-   * const ApiKey = await prisma.apiKey.delete({
+   * // Delete one Apikey
+   * const Apikey = await prisma.apikey.delete({
    *   where: {
-   *     // ... filter to delete one ApiKey
+   *     // ... filter to delete one Apikey
    *   }
    * })
    * 
    */
-  delete<T extends ApiKeyDeleteArgs>(args: Prisma.SelectSubset<T, ApiKeyDeleteArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  delete<T extends ApikeyDeleteArgs>(args: Prisma.SelectSubset<T, ApikeyDeleteArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
-   * Update one ApiKey.
-   * @param {ApiKeyUpdateArgs} args - Arguments to update one ApiKey.
+   * Update one Apikey.
+   * @param {ApikeyUpdateArgs} args - Arguments to update one Apikey.
    * @example
-   * // Update one ApiKey
-   * const apiKey = await prisma.apiKey.update({
+   * // Update one Apikey
+   * const apikey = await prisma.apikey.update({
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1061,30 +1061,30 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    * })
    * 
    */
-  update<T extends ApiKeyUpdateArgs>(args: Prisma.SelectSubset<T, ApiKeyUpdateArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  update<T extends ApikeyUpdateArgs>(args: Prisma.SelectSubset<T, ApikeyUpdateArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
-   * Delete zero or more ApiKeys.
-   * @param {ApiKeyDeleteManyArgs} args - Arguments to filter ApiKeys to delete.
+   * Delete zero or more Apikeys.
+   * @param {ApikeyDeleteManyArgs} args - Arguments to filter Apikeys to delete.
    * @example
-   * // Delete a few ApiKeys
-   * const { count } = await prisma.apiKey.deleteMany({
+   * // Delete a few Apikeys
+   * const { count } = await prisma.apikey.deleteMany({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
    * 
    */
-  deleteMany<T extends ApiKeyDeleteManyArgs>(args?: Prisma.SelectSubset<T, ApiKeyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  deleteMany<T extends ApikeyDeleteManyArgs>(args?: Prisma.SelectSubset<T, ApikeyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more ApiKeys.
+   * Update zero or more Apikeys.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ApiKeyUpdateManyArgs} args - Arguments to update one or more rows.
+   * @param {ApikeyUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
-   * // Update many ApiKeys
-   * const apiKey = await prisma.apiKey.updateMany({
+   * // Update many Apikeys
+   * const apikey = await prisma.apikey.updateMany({
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1094,14 +1094,14 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    * })
    * 
    */
-  updateMany<T extends ApiKeyUpdateManyArgs>(args: Prisma.SelectSubset<T, ApiKeyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  updateMany<T extends ApikeyUpdateManyArgs>(args: Prisma.SelectSubset<T, ApikeyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more ApiKeys and returns the data updated in the database.
-   * @param {ApiKeyUpdateManyAndReturnArgs} args - Arguments to update many ApiKeys.
+   * Update zero or more Apikeys and returns the data updated in the database.
+   * @param {ApikeyUpdateManyAndReturnArgs} args - Arguments to update many Apikeys.
    * @example
-   * // Update many ApiKeys
-   * const apiKey = await prisma.apiKey.updateManyAndReturn({
+   * // Update many Apikeys
+   * const apikey = await prisma.apikey.updateManyAndReturn({
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1110,8 +1110,8 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    *   ]
    * })
    * 
-   * // Update zero or more ApiKeys and only return the `id`
-   * const apiKeyWithIdOnly = await prisma.apiKey.updateManyAndReturn({
+   * // Update zero or more Apikeys and only return the `id`
+   * const apikeyWithIdOnly = await prisma.apikey.updateManyAndReturn({
    *   select: { id: true },
    *   where: {
    *     // ... provide filter here
@@ -1124,56 +1124,56 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  updateManyAndReturn<T extends ApiKeyUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ApiKeyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+  updateManyAndReturn<T extends ApikeyUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ApikeyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
-   * Create or update one ApiKey.
-   * @param {ApiKeyUpsertArgs} args - Arguments to update or create a ApiKey.
+   * Create or update one Apikey.
+   * @param {ApikeyUpsertArgs} args - Arguments to update or create a Apikey.
    * @example
-   * // Update or create a ApiKey
-   * const apiKey = await prisma.apiKey.upsert({
+   * // Update or create a Apikey
+   * const apikey = await prisma.apikey.upsert({
    *   create: {
-   *     // ... data to create a ApiKey
+   *     // ... data to create a Apikey
    *   },
    *   update: {
    *     // ... in case it already exists, update
    *   },
    *   where: {
-   *     // ... the filter for the ApiKey we want to update
+   *     // ... the filter for the Apikey we want to update
    *   }
    * })
    */
-  upsert<T extends ApiKeyUpsertArgs>(args: Prisma.SelectSubset<T, ApiKeyUpsertArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  upsert<T extends ApikeyUpsertArgs>(args: Prisma.SelectSubset<T, ApikeyUpsertArgs<ExtArgs>>): Prisma.Prisma__ApikeyClient<runtime.Types.Result.GetResult<Prisma.$ApikeyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
   /**
-   * Count the number of ApiKeys.
+   * Count the number of Apikeys.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ApiKeyCountArgs} args - Arguments to filter ApiKeys to count.
+   * @param {ApikeyCountArgs} args - Arguments to filter Apikeys to count.
    * @example
-   * // Count the number of ApiKeys
-   * const count = await prisma.apiKey.count({
+   * // Count the number of Apikeys
+   * const count = await prisma.apikey.count({
    *   where: {
-   *     // ... the filter for the ApiKeys we want to count
+   *     // ... the filter for the Apikeys we want to count
    *   }
    * })
   **/
-  count<T extends ApiKeyCountArgs>(
-    args?: Prisma.Subset<T, ApiKeyCountArgs>,
+  count<T extends ApikeyCountArgs>(
+    args?: Prisma.Subset<T, ApikeyCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<'select', any>
       ? T['select'] extends true
         ? number
-        : Prisma.GetScalarType<T['select'], ApiKeyCountAggregateOutputType>
+        : Prisma.GetScalarType<T['select'], ApikeyCountAggregateOutputType>
       : number
   >
 
   /**
-   * Allows you to perform aggregations operations on a ApiKey.
+   * Allows you to perform aggregations operations on a Apikey.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ApiKeyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+   * @param {ApikeyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
    * @example
    * // Ordered by age ascending
    * // Where email contains prisma.io
@@ -1193,13 +1193,13 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    *   take: 10,
    * })
   **/
-  aggregate<T extends ApiKeyAggregateArgs>(args: Prisma.Subset<T, ApiKeyAggregateArgs>): Prisma.PrismaPromise<GetApiKeyAggregateType<T>>
+  aggregate<T extends ApikeyAggregateArgs>(args: Prisma.Subset<T, ApikeyAggregateArgs>): Prisma.PrismaPromise<GetApikeyAggregateType<T>>
 
   /**
-   * Group by ApiKey.
+   * Group by Apikey.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ApiKeyGroupByArgs} args - Group by arguments.
+   * @param {ApikeyGroupByArgs} args - Group by arguments.
    * @example
    * // Group by city, order by createdAt, get count
    * const result = await prisma.user.groupBy({
@@ -1214,14 +1214,14 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    * 
   **/
   groupBy<
-    T extends ApiKeyGroupByArgs,
+    T extends ApikeyGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: ApiKeyGroupByArgs['orderBy'] }
-      : { orderBy?: ApiKeyGroupByArgs['orderBy'] },
+      ? { orderBy: ApikeyGroupByArgs['orderBy'] }
+      : { orderBy?: ApikeyGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
@@ -1270,20 +1270,20 @@ export interface ApiKeyDelegate<ExtArgs extends runtime.Types.Extensions.Interna
           ? never
           : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
       }[OrderFields]
-  >(args: Prisma.SubsetIntersection<T, ApiKeyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetApiKeyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  >(args: Prisma.SubsetIntersection<T, ApikeyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetApikeyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 /**
- * Fields of the ApiKey model
+ * Fields of the Apikey model
  */
-readonly fields: ApiKeyFieldRefs;
+readonly fields: ApikeyFieldRefs;
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for ApiKey.
+ * The delegate class that acts as a "Promise-like" for Apikey.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export interface Prisma__ApiKeyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+export interface Prisma__ApikeyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1311,397 +1311,397 @@ export interface Prisma__ApiKeyClient<T, Null = never, ExtArgs extends runtime.T
 
 
 /**
- * Fields of the ApiKey model
+ * Fields of the Apikey model
  */
-export interface ApiKeyFieldRefs {
-  readonly id: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly configId: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly name: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly start: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly prefix: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly key: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly referenceId: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly refillInterval: Prisma.FieldRef<"ApiKey", 'Int'>
-  readonly refillAmount: Prisma.FieldRef<"ApiKey", 'Int'>
-  readonly lastRefillAt: Prisma.FieldRef<"ApiKey", 'DateTime'>
-  readonly enabled: Prisma.FieldRef<"ApiKey", 'Boolean'>
-  readonly rateLimitEnabled: Prisma.FieldRef<"ApiKey", 'Boolean'>
-  readonly rateLimitTimeWindow: Prisma.FieldRef<"ApiKey", 'Int'>
-  readonly rateLimitMax: Prisma.FieldRef<"ApiKey", 'Int'>
-  readonly requestCount: Prisma.FieldRef<"ApiKey", 'Int'>
-  readonly remaining: Prisma.FieldRef<"ApiKey", 'Int'>
-  readonly lastRequest: Prisma.FieldRef<"ApiKey", 'DateTime'>
-  readonly expiresAt: Prisma.FieldRef<"ApiKey", 'DateTime'>
-  readonly createdAt: Prisma.FieldRef<"ApiKey", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"ApiKey", 'DateTime'>
-  readonly permissions: Prisma.FieldRef<"ApiKey", 'String'>
-  readonly metadata: Prisma.FieldRef<"ApiKey", 'String'>
+export interface ApikeyFieldRefs {
+  readonly id: Prisma.FieldRef<"Apikey", 'String'>
+  readonly configId: Prisma.FieldRef<"Apikey", 'String'>
+  readonly name: Prisma.FieldRef<"Apikey", 'String'>
+  readonly start: Prisma.FieldRef<"Apikey", 'String'>
+  readonly prefix: Prisma.FieldRef<"Apikey", 'String'>
+  readonly key: Prisma.FieldRef<"Apikey", 'String'>
+  readonly referenceId: Prisma.FieldRef<"Apikey", 'String'>
+  readonly refillInterval: Prisma.FieldRef<"Apikey", 'Int'>
+  readonly refillAmount: Prisma.FieldRef<"Apikey", 'Int'>
+  readonly lastRefillAt: Prisma.FieldRef<"Apikey", 'DateTime'>
+  readonly enabled: Prisma.FieldRef<"Apikey", 'Boolean'>
+  readonly rateLimitEnabled: Prisma.FieldRef<"Apikey", 'Boolean'>
+  readonly rateLimitTimeWindow: Prisma.FieldRef<"Apikey", 'Int'>
+  readonly rateLimitMax: Prisma.FieldRef<"Apikey", 'Int'>
+  readonly requestCount: Prisma.FieldRef<"Apikey", 'Int'>
+  readonly remaining: Prisma.FieldRef<"Apikey", 'Int'>
+  readonly lastRequest: Prisma.FieldRef<"Apikey", 'DateTime'>
+  readonly expiresAt: Prisma.FieldRef<"Apikey", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"Apikey", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Apikey", 'DateTime'>
+  readonly permissions: Prisma.FieldRef<"Apikey", 'String'>
+  readonly metadata: Prisma.FieldRef<"Apikey", 'String'>
 }
     
 
 // Custom InputTypes
 /**
- * ApiKey findUnique
+ * Apikey findUnique
  */
-export type ApiKeyFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * Filter, which ApiKey to fetch.
+   * Filter, which Apikey to fetch.
    */
-  where: Prisma.ApiKeyWhereUniqueInput
+  where: Prisma.ApikeyWhereUniqueInput
 }
 
 /**
- * ApiKey findUniqueOrThrow
+ * Apikey findUniqueOrThrow
  */
-export type ApiKeyFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * Filter, which ApiKey to fetch.
+   * Filter, which Apikey to fetch.
    */
-  where: Prisma.ApiKeyWhereUniqueInput
+  where: Prisma.ApikeyWhereUniqueInput
 }
 
 /**
- * ApiKey findFirst
+ * Apikey findFirst
  */
-export type ApiKeyFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * Filter, which ApiKey to fetch.
+   * Filter, which Apikey to fetch.
    */
-  where?: Prisma.ApiKeyWhereInput
+  where?: Prisma.ApikeyWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of ApiKeys to fetch.
+   * Determine the order of Apikeys to fetch.
    */
-  orderBy?: Prisma.ApiKeyOrderByWithRelationInput | Prisma.ApiKeyOrderByWithRelationInput[]
+  orderBy?: Prisma.ApikeyOrderByWithRelationInput | Prisma.ApikeyOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for ApiKeys.
+   * Sets the position for searching for Apikeys.
    */
-  cursor?: Prisma.ApiKeyWhereUniqueInput
+  cursor?: Prisma.ApikeyWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` ApiKeys from the position of the cursor.
+   * Take `±n` Apikeys from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` ApiKeys.
+   * Skip the first `n` Apikeys.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of ApiKeys.
+   * Filter by unique combinations of Apikeys.
    */
-  distinct?: Prisma.ApiKeyScalarFieldEnum | Prisma.ApiKeyScalarFieldEnum[]
+  distinct?: Prisma.ApikeyScalarFieldEnum | Prisma.ApikeyScalarFieldEnum[]
 }
 
 /**
- * ApiKey findFirstOrThrow
+ * Apikey findFirstOrThrow
  */
-export type ApiKeyFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * Filter, which ApiKey to fetch.
+   * Filter, which Apikey to fetch.
    */
-  where?: Prisma.ApiKeyWhereInput
+  where?: Prisma.ApikeyWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of ApiKeys to fetch.
+   * Determine the order of Apikeys to fetch.
    */
-  orderBy?: Prisma.ApiKeyOrderByWithRelationInput | Prisma.ApiKeyOrderByWithRelationInput[]
+  orderBy?: Prisma.ApikeyOrderByWithRelationInput | Prisma.ApikeyOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for ApiKeys.
+   * Sets the position for searching for Apikeys.
    */
-  cursor?: Prisma.ApiKeyWhereUniqueInput
+  cursor?: Prisma.ApikeyWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` ApiKeys from the position of the cursor.
+   * Take `±n` Apikeys from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` ApiKeys.
+   * Skip the first `n` Apikeys.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of ApiKeys.
+   * Filter by unique combinations of Apikeys.
    */
-  distinct?: Prisma.ApiKeyScalarFieldEnum | Prisma.ApiKeyScalarFieldEnum[]
+  distinct?: Prisma.ApikeyScalarFieldEnum | Prisma.ApikeyScalarFieldEnum[]
 }
 
 /**
- * ApiKey findMany
+ * Apikey findMany
  */
-export type ApiKeyFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * Filter, which ApiKeys to fetch.
+   * Filter, which Apikeys to fetch.
    */
-  where?: Prisma.ApiKeyWhereInput
+  where?: Prisma.ApikeyWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of ApiKeys to fetch.
+   * Determine the order of Apikeys to fetch.
    */
-  orderBy?: Prisma.ApiKeyOrderByWithRelationInput | Prisma.ApiKeyOrderByWithRelationInput[]
+  orderBy?: Prisma.ApikeyOrderByWithRelationInput | Prisma.ApikeyOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for listing ApiKeys.
+   * Sets the position for listing Apikeys.
    */
-  cursor?: Prisma.ApiKeyWhereUniqueInput
+  cursor?: Prisma.ApikeyWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` ApiKeys from the position of the cursor.
+   * Take `±n` Apikeys from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` ApiKeys.
+   * Skip the first `n` Apikeys.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of ApiKeys.
+   * Filter by unique combinations of Apikeys.
    */
-  distinct?: Prisma.ApiKeyScalarFieldEnum | Prisma.ApiKeyScalarFieldEnum[]
+  distinct?: Prisma.ApikeyScalarFieldEnum | Prisma.ApikeyScalarFieldEnum[]
 }
 
 /**
- * ApiKey create
+ * Apikey create
  */
-export type ApiKeyCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * The data needed to create a ApiKey.
+   * The data needed to create a Apikey.
    */
-  data: Prisma.XOR<Prisma.ApiKeyCreateInput, Prisma.ApiKeyUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.ApikeyCreateInput, Prisma.ApikeyUncheckedCreateInput>
 }
 
 /**
- * ApiKey createMany
+ * Apikey createMany
  */
-export type ApiKeyCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to create many ApiKeys.
+   * The data used to create many Apikeys.
    */
-  data: Prisma.ApiKeyCreateManyInput | Prisma.ApiKeyCreateManyInput[]
+  data: Prisma.ApikeyCreateManyInput | Prisma.ApikeyCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * ApiKey createManyAndReturn
+ * Apikey createManyAndReturn
  */
-export type ApiKeyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelectCreateManyAndReturn<ExtArgs> | null
+  select?: Prisma.ApikeySelectCreateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * The data used to create many ApiKeys.
+   * The data used to create many Apikeys.
    */
-  data: Prisma.ApiKeyCreateManyInput | Prisma.ApiKeyCreateManyInput[]
+  data: Prisma.ApikeyCreateManyInput | Prisma.ApikeyCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * ApiKey update
+ * Apikey update
  */
-export type ApiKeyUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * The data needed to update a ApiKey.
+   * The data needed to update a Apikey.
    */
-  data: Prisma.XOR<Prisma.ApiKeyUpdateInput, Prisma.ApiKeyUncheckedUpdateInput>
+  data: Prisma.XOR<Prisma.ApikeyUpdateInput, Prisma.ApikeyUncheckedUpdateInput>
   /**
-   * Choose, which ApiKey to update.
+   * Choose, which Apikey to update.
    */
-  where: Prisma.ApiKeyWhereUniqueInput
+  where: Prisma.ApikeyWhereUniqueInput
 }
 
 /**
- * ApiKey updateMany
+ * Apikey updateMany
  */
-export type ApiKeyUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to update ApiKeys.
+   * The data used to update Apikeys.
    */
-  data: Prisma.XOR<Prisma.ApiKeyUpdateManyMutationInput, Prisma.ApiKeyUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.ApikeyUpdateManyMutationInput, Prisma.ApikeyUncheckedUpdateManyInput>
   /**
-   * Filter which ApiKeys to update
+   * Filter which Apikeys to update
    */
-  where?: Prisma.ApiKeyWhereInput
+  where?: Prisma.ApikeyWhereInput
   /**
-   * Limit how many ApiKeys to update.
+   * Limit how many Apikeys to update.
    */
   limit?: number
 }
 
 /**
- * ApiKey updateManyAndReturn
+ * Apikey updateManyAndReturn
  */
-export type ApiKeyUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelectUpdateManyAndReturn<ExtArgs> | null
+  select?: Prisma.ApikeySelectUpdateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * The data used to update ApiKeys.
+   * The data used to update Apikeys.
    */
-  data: Prisma.XOR<Prisma.ApiKeyUpdateManyMutationInput, Prisma.ApiKeyUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.ApikeyUpdateManyMutationInput, Prisma.ApikeyUncheckedUpdateManyInput>
   /**
-   * Filter which ApiKeys to update
+   * Filter which Apikeys to update
    */
-  where?: Prisma.ApiKeyWhereInput
+  where?: Prisma.ApikeyWhereInput
   /**
-   * Limit how many ApiKeys to update.
+   * Limit how many Apikeys to update.
    */
   limit?: number
 }
 
 /**
- * ApiKey upsert
+ * Apikey upsert
  */
-export type ApiKeyUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * The filter to search for the ApiKey to update in case it exists.
+   * The filter to search for the Apikey to update in case it exists.
    */
-  where: Prisma.ApiKeyWhereUniqueInput
+  where: Prisma.ApikeyWhereUniqueInput
   /**
-   * In case the ApiKey found by the `where` argument doesn't exist, create a new ApiKey with this data.
+   * In case the Apikey found by the `where` argument doesn't exist, create a new Apikey with this data.
    */
-  create: Prisma.XOR<Prisma.ApiKeyCreateInput, Prisma.ApiKeyUncheckedCreateInput>
+  create: Prisma.XOR<Prisma.ApikeyCreateInput, Prisma.ApikeyUncheckedCreateInput>
   /**
-   * In case the ApiKey was found with the provided `where` argument, update it with this data.
+   * In case the Apikey was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<Prisma.ApiKeyUpdateInput, Prisma.ApiKeyUncheckedUpdateInput>
+  update: Prisma.XOR<Prisma.ApikeyUpdateInput, Prisma.ApikeyUncheckedUpdateInput>
 }
 
 /**
- * ApiKey delete
+ * Apikey delete
  */
-export type ApiKeyDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
   /**
-   * Filter which ApiKey to delete.
+   * Filter which Apikey to delete.
    */
-  where: Prisma.ApiKeyWhereUniqueInput
+  where: Prisma.ApikeyWhereUniqueInput
 }
 
 /**
- * ApiKey deleteMany
+ * Apikey deleteMany
  */
-export type ApiKeyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which ApiKeys to delete
+   * Filter which Apikeys to delete
    */
-  where?: Prisma.ApiKeyWhereInput
+  where?: Prisma.ApikeyWhereInput
   /**
-   * Limit how many ApiKeys to delete.
+   * Limit how many Apikeys to delete.
    */
   limit?: number
 }
 
 /**
- * ApiKey without action
+ * Apikey without action
  */
-export type ApiKeyDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ApikeyDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ApiKey
+   * Select specific fields to fetch from the Apikey
    */
-  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  select?: Prisma.ApikeySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ApiKey
+   * Omit specific fields from the Apikey
    */
-  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
 }

@@ -58,7 +58,7 @@ export const ModelName = {
   Url: 'Url',
   QrCode: 'QrCode',
   Click: 'Click',
-  ApiKey: 'ApiKey'
+  Apikey: 'Apikey'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -179,7 +179,7 @@ export const ClickScalarFieldEnum = {
 export type ClickScalarFieldEnum = (typeof ClickScalarFieldEnum)[keyof typeof ClickScalarFieldEnum]
 
 
-export const ApiKeyScalarFieldEnum = {
+export const ApikeyScalarFieldEnum = {
   id: 'id',
   configId: 'configId',
   name: 'name',
@@ -204,7 +204,7 @@ export const ApiKeyScalarFieldEnum = {
   metadata: 'metadata'
 } as const
 
-export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
+export type ApikeyScalarFieldEnum = (typeof ApikeyScalarFieldEnum)[keyof typeof ApikeyScalarFieldEnum]
 
 
 export const SortOrder = {

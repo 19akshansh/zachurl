@@ -133,7 +133,7 @@ model Click {
   @@map("click")
 }
 
-model ApiKey {
+model Apikey {
   id                  String    @id
   configId            String    @default("default")
   name                String?

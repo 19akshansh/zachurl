@@ -391,7 +391,7 @@ export const ModelName = {
   Url: 'Url',
   QrCode: 'QrCode',
   Click: 'Click',
-  ApiKey: 'ApiKey'
+  Apikey: 'Apikey'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "url" | "qrCode" | "click" | "apiKey"
+    modelProps: "user" | "session" | "account" | "verification" | "url" | "qrCode" | "click" | "apikey"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -929,77 +929,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ApiKey: {
-      payload: Prisma.$ApiKeyPayload<ExtArgs>
-      fields: Prisma.ApiKeyFieldRefs
+    Apikey: {
+      payload: Prisma.$ApikeyPayload<ExtArgs>
+      fields: Prisma.ApikeyFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ApiKeyFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload> | null
+          args: Prisma.ApikeyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ApiKeyFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+          args: Prisma.ApikeyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
         }
         findFirst: {
-          args: Prisma.ApiKeyFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload> | null
+          args: Prisma.ApikeyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ApiKeyFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+          args: Prisma.ApikeyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
         }
         findMany: {
-          args: Prisma.ApiKeyFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+          args: Prisma.ApikeyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>[]
         }
         create: {
-          args: Prisma.ApiKeyCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+          args: Prisma.ApikeyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
         }
         createMany: {
-          args: Prisma.ApiKeyCreateManyArgs<ExtArgs>
+          args: Prisma.ApikeyCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ApiKeyCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+          args: Prisma.ApikeyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>[]
         }
         delete: {
-          args: Prisma.ApiKeyDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+          args: Prisma.ApikeyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
         }
         update: {
-          args: Prisma.ApiKeyUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+          args: Prisma.ApikeyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
         }
         deleteMany: {
-          args: Prisma.ApiKeyDeleteManyArgs<ExtArgs>
+          args: Prisma.ApikeyDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ApiKeyUpdateManyArgs<ExtArgs>
+          args: Prisma.ApikeyUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ApiKeyUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+          args: Prisma.ApikeyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>[]
         }
         upsert: {
-          args: Prisma.ApiKeyUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+          args: Prisma.ApikeyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
         }
         aggregate: {
-          args: Prisma.ApiKeyAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateApiKey>
+          args: Prisma.ApikeyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateApikey>
         }
         groupBy: {
-          args: Prisma.ApiKeyGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ApiKeyGroupByOutputType>[]
+          args: Prisma.ApikeyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApikeyGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ApiKeyCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ApiKeyCountAggregateOutputType> | number
+          args: Prisma.ApikeyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApikeyCountAggregateOutputType> | number
         }
       }
     }
@@ -1144,7 +1144,7 @@ export const ClickScalarFieldEnum = {
 export type ClickScalarFieldEnum = (typeof ClickScalarFieldEnum)[keyof typeof ClickScalarFieldEnum]
 
 
-export const ApiKeyScalarFieldEnum = {
+export const ApikeyScalarFieldEnum = {
   id: 'id',
   configId: 'configId',
   name: 'name',
@@ -1169,7 +1169,7 @@ export const ApiKeyScalarFieldEnum = {
   metadata: 'metadata'
 } as const
 
-export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
+export type ApikeyScalarFieldEnum = (typeof ApikeyScalarFieldEnum)[keyof typeof ApikeyScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1381,7 +1381,7 @@ export type GlobalOmitConfig = {
   url?: Prisma.UrlOmit
   qrCode?: Prisma.QrCodeOmit
   click?: Prisma.ClickOmit
-  apiKey?: Prisma.ApiKeyOmit
+  apikey?: Prisma.ApikeyOmit
 }
 
 /* Types for Logging */
